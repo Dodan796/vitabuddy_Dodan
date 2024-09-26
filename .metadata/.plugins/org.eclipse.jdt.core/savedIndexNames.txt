@@ -1,0 +1,2 @@
+INDEX VERSION 1.131+C:\Users\leeje\Desktop\BeautyInside\Project_teamreposit\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index

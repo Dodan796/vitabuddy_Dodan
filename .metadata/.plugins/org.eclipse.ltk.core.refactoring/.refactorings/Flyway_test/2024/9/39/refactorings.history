@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Flyway_test/src/main/resources/db/migration/V1_create_member_table.sql&apos; to &apos;V1_create_employee_table.sql&apos;" description="Rename resource &apos;V1_create_member_table.sql&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/db/migration/V1_create_member_table.sql" name="V1_create_employee_table.sql" stamp="1727277978426" updateReferences="true"/>
+</session>
