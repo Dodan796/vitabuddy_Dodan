@@ -1,4 +1,4 @@
-package com.example.vitabuddy.config;
+package com.example.vitabuddy;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
