@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.vitabuddy.dao.IMemberDAO">
+		<!-- 1. 리뷰작성 -->
+	<insert id="insertReview" parameterType="com.example.vitabuddy.model.ReviewVO">
+		INSERT INTO REVIEW(REVIEWNO, REVIEWTITLE, USERID, SUPID, RATING, REVIEWHASHTAG, REVIEWDATE, CONTENT, STARTDATE, ENDDATE, REVIEWIMG)
+		VALUES (#{ReviewNo}, #{ReviewTitle}, #{UserId}, #{SupId}, #{Rating}, #{ReviewHashtag}, SYSDATE, #{Content}, #{StartDate}, #{EndDate}, #{ReviewImg})
+	</insert>
+
+		<!-- 2. 리뷰 조회 -->
+	<select id="reviewList" parameterType="int" resultType="com.example.vitabuddy.model.ReviewVO">
+		SELECT * FROM REVIEW
+		WHERE SUPID = #{SupId} 
+		ORDER BY REVIEWDATE DESC
+	</select>
+
+		<!-- 3. 리뷰 삭제  -->
+	<delete id="deleteReview" parameterType="map">
+		DELETE 
+		FROM REVIEW
+		WHERE REVIEWNO=#{ReviewNo} AND USERID=#{UserId}
+	</delete>
+
+		<!-- 4. 리뷰 수정 -->	
+	<update id="updateReview" parameterType="com.example.vitabuddy.model.ReviewVO">
+	UPDATE REVIEW
+        SET REVIEWTITLE = #{ReviewTitle},
+            RATING = #{Rating},
+            REVIEWHASHTAG = #{ReviewHashtag},
+            CONTENT = #{Content},
+            STARTDATE = #{StartDate},
+            ENDDATE = #{EndDate},
+            REVIEWIMG = #{ReviewImg}
+        WHERE REVIEWNO = #{ReviewNo} AND USERID = #{UserId}	
+	</update>
+
+
+	</mapper>
