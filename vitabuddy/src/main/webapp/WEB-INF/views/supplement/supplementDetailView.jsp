@@ -161,7 +161,7 @@
 				<textarea class="reviewTxt" name="content" cols="150" rows="5"></textarea>
 				<br>
 				<!-- 사진 첨부 -->
-				<input class="Upload" type="file" id="uploadFile" name="imageUrl">
+				<input class="Upload" type="file" id="imageUrl" name="imageUrl">
 
 				<br>
 
@@ -185,7 +185,7 @@
 							<p>${review.userId}</p>
 						</td>
 						<td>
-							<div class="hashTag">${review.reviewTag}</div>
+							<div class="hashTag">${review.ReviewHashtag}</div>
 						</td>
 						<td></td>
 						<td><c:if test="${review.userId == sessionScope.sid}">
@@ -236,17 +236,15 @@
 			<nav>
 				<!-- 페이지네이션 -->
 				<div class="pagination">
-					<a href="#"
-						class="prev <c:if test='${currentPage == 1}'>disabled</c:if>"
-						data-page="${currentPage - 1}""><i
-						class="fa-solid fa-caret-left"></i></a>
+					<a href="#" class="prev <c:if test='${currentPage == 1}'>disabled</c:if>" data-page="${currentPage - 1}"">
+						<i class="fa-solid fa-caret-left"></i>
+					</a>
 					<c:forEach var="i" begin="1" end="${totalPages}">
 						<a href="#" class="page" onclick="changePage(${i})">${i}</a>
 					</c:forEach>
-					<a href="#"
-						class="next <c:if test='${currentPage == totalPages}'>disabled</c:if>"
-						data-page="${currentPage - 1}"><i
-						class="fa-solid fa-caret-right"></i></a>
+					<a href="#" class="next <c:if test='${currentPage == totalPages}'>disabled</c:if>" data-page="${currentPage - 1}">
+						<i class="fa-solid fa-caret-right"></i>
+					</a>
 				</div>
 			</nav>
 
