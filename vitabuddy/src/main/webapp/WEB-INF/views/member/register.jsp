@@ -8,12 +8,12 @@
     <script src="https://kit.fontawesome.com/567f0760c2.js" crossorigin="anonymous"></script>
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <title>비타버디 가입하기</title>
-    <link rel="stylesheet" type="text/css" href="<c:url value='/css/common.css'/>">
+    <link rel="stylesheet" type="text/css" href="<c:url value='/css/register.css'/>">
+    <c:import url="/WEB-INF/views/layout/head.jsp" /> 
     <script src="/js/register.js"></script> <!-- JS 파일을 추가 -->
 </head>
 <body>
 <c:import url="/WEB-INF/views/layout/top.jsp" /> 
-<c:import url="/WEB-INF/views/layout/head.jsp" /> 
 	<div id="wrap">
 		<div class="container">
 			<h1>회원 가입</h1>

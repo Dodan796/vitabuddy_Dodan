@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /* 버튼 태그 기본 css 제거 */
-button, .btn{
+button{
 	max-width: 150px;
 	font-family: inherit;
 	cursor: pointer;
@@ -11,5 +11,4 @@ button, .btn{
 	border-radius: 25px;
 	background-color:#583b1f;
 	color:#e5e0da;
-	padding: 10px 20px;
 }

@@ -13,7 +13,7 @@
 					<!-- 로그인 하지 않은 경우 -->
 					<c:if test="${empty sessionScope.sid}">
 					<a href="<c:url value='/'/>">로그인</a>					
-					<a href="<c:url value='/joinForm'/>">회원가입</a>
+					<a href="<c:url value='/member/register'/>">회원가입</a>
 					</c:if>
 					
 					<!-- 로그인 한 경우 -->
