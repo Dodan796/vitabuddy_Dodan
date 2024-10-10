@@ -38,7 +38,7 @@ public class ReviewController {
 	// 2. 리뷰 작성
 	@ResponseBody
 	@RequestMapping("/insertReview")
-	public String insertReview(ReviewVO review, @RequestParam("file") MultipartFile file, HttpSession session) {
+	public String insertReview(ReviewVO review, @RequestParam("ReviewImg") MultipartFile file, HttpSession session) {
 		String userId = getUserId(session);
 		if (userId == null) {
 			return "fail";
