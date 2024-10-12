@@ -31,6 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+<<<<<<< HEAD
 
 # 사용자 환경 설정 및 시스템 파일 무시
 .bash_history
@@ -59,3 +60,5 @@ git/
 # SQL 파일 무시
 VITABUDDY*.sql
 
+=======
+>>>>>>> origin/features/Login
