@@ -1,126 +1,105 @@
 package com.example.vitabuddy.controller;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.example.vitabuddy.model.ReviewVO;
-import com.example.vitabuddy.service.ReviewService;
+import com.example.vitabuddy.service.IReviewService;
 
 import jakarta.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
+
 @Controller
+@RequestMapping("/supplement")
 public class ReviewController {
 
-	@Autowired
-	ReviewService revService;
+    @Autowired
+    private IReviewService reviewService;
 
-	// 파일(이미지) 업로드 경로 읽어오기
-	@Value("${file.upload-dir}")
-	private String uploadDir;
+    private static final String UPLOAD_DIR = "C:/Review_Upload/"; // 파일이 저장될 경로
 
-	// 1. 회원 Id 추출
-	private String getUserId(HttpSession session) {
-		return (String) session.getAttribute("sid");
-	}
+    // 1. 리뷰 목록 조회 (회원/비회원 모두 가능)
+    @GetMapping("/supplementDetail/{supId}/reviews")
+    public String getReviewList(@PathVariable("supId") int supId, Model model) {
+        List<ReviewVO> reviews = reviewService.reviewLists(supId);
+        model.addAttribute("reviewList", reviews);
+        return "supplement/reviewList"; // 리뷰 목록을 보여주는 JSP 파일
+    }
 
-	// 2. 리뷰 작성
-	@ResponseBody
-	@RequestMapping("/insertReview")
-	public String insertReview(ReviewVO review, @RequestParam("ReviewImg") MultipartFile file, HttpSession session) {
-		String userId = getUserId(session);
-		if (userId == null) {
-			return "fail";
-		}
-		try {
-			if (file != null && !file.isEmpty()) {
-				// 파일 경로를 상대 경로로 설정
-				Path path = Paths.get(uploadDir + file.getOriginalFilename());
-				Files.write(path, file.getBytes());
+    // 2. 리뷰 작성 처리 (회원만 가능)
+    @PostMapping("/supplementDetail/{supId}/review")
+    public String insertReview(@PathVariable("supId") int supId,   						   
+    						   @RequestParam("reviewTitle") String reviewTitle,
+                               @RequestParam("rating") String rating,
+                               @RequestParam("reviewHashtag") String reviewHashtag,
+                               @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+                               @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+                               @RequestParam("content") String content,
+                               @RequestParam(value = "reviewImg", required = false) List<MultipartFile> reviewImgFiles,
+                               HttpSession session) {
 
-				// 업로드된 파일 경로를 ReviewVO에 설정
-				review.setReviewImg(file.getOriginalFilename());
-			} else {
-				review.setReviewImg(null); // 파일이 없는 경우 null로 설정
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "fail"; // 파일 업로드 실패 시
-		}
+        // 로그인 여부 확인
+        String userId = (String) session.getAttribute("sid");
+        if (userId == null) {
+            return "redirect:/"; // 비회원일 경우 로그인 페이지로 리다이렉트
+        }
 
-		review.setUserId(userId);
-		revService.insertReview(review);
-		return "success";
-	}
+        ReviewVO reviewVO = new ReviewVO();
+        // 고유한 REVIEWNO 생성
+        String reviewNo = UUID.randomUUID().toString();
+        reviewVO.setReviewNo(reviewNo);
+        reviewVO.setSupId(supId);
+        reviewVO.setUserId(userId);
+        reviewVO.setReviewDate(new Date());
+        reviewVO.setReviewTitle(reviewTitle);
+        reviewVO.setRating(rating);
+        reviewVO.setReviewHashtag(reviewHashtag);
+        reviewVO.setStartDate(startDate);
+        reviewVO.setEndDate(endDate);
+        reviewVO.setContent(content);
 
-	// 3. 리뷰 조회
-	@RequestMapping("/reviewList")
-	public String reviewList(@PathVariable int supId, Model model) {
-		ArrayList<ReviewVO> reviews = revService.reviewList(supId);
-		model.addAttribute("reviews", reviews);
-		return "supplement/supplementDetailView";
-	}
+        // 이미지 파일 처리 (최대 3개)
+        StringBuilder imageNames = new StringBuilder();
+        if (reviewImgFiles != null && !reviewImgFiles.isEmpty()) {
+            for (int i = 0; i < Math.min(3, reviewImgFiles.size()); i++) {
+                MultipartFile file = reviewImgFiles.get(i);
+                if (!file.isEmpty()) {
+                    // 고유 파일명 생성 (UUID 사용)
+                    String originalFilename = file.getOriginalFilename();
+                    String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+                    String uniqueFileName = UUID.randomUUID().toString() + extension;
 
-	// 4. 리뷰 삭제
-	@ResponseBody
-	@RequestMapping("/deleteReview")
-	public String deleteReview(@RequestParam("reviewNo") String reviewNo, HttpSession session) {
-		String userId = getUserId(session);
+                    // 파일 저장
+                    try {
+                        File destFile = new File(UPLOAD_DIR + uniqueFileName);
+                        file.transferTo(destFile);
+                        imageNames.append(uniqueFileName).append(";");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return "error/fileUploadError"; // 파일 저장 실패 시 에러 페이지로 이동
+                    }
+                }
+            }
+        }
 
-		if (userId == null) {
-			return "fail";
-		}
-		ReviewVO review = revService.getReview(reviewNo);
-		if (review == null || !review.getUserId().equals(userId)) {
-			return "fail";
-		}
-		revService.deleteReview(reviewNo, userId);
-		return "success";
-	}
+        // 이미지 파일명을 reviewVO에 설정
+        reviewVO.setReviewImg(imageNames.toString());
 
-	// 5. 리뷰 수정
-	@ResponseBody
-	@RequestMapping("/updateReview")
-	public String updateReview(ReviewVO reviewVO, @RequestParam("file") MultipartFile file, HttpSession session) {
-		String userId = getUserId(session);
+        // 리뷰 저장
+        int result = reviewService.insertReview(reviewVO);
+        if (result == -1) {
+            return "error/fileUploadError"; // 파일 저장 실패 시 에러 페이지로 이동
+        }
 
-		if (userId == null) {
-			return "fail";
-		}
-
-		ReviewVO checkReview = revService.getReview(reviewVO.getReviewNo());
-		if (checkReview == null || !checkReview.getUserId().equals(userId)) {
-			return "fail";
-		}
-		try {
-			if (file != null && !file.isEmpty()) {
-				// 파일 경로를 상대 경로로 설정
-				Path path = Paths.get(uploadDir + file.getOriginalFilename());
-				Files.write(path, file.getBytes());
-
-				// 업로드된 파일 경로를 ReviewVO에 설정
-				reviewVO.setReviewImg(file.getOriginalFilename());
-			} else {
-				reviewVO.setReviewImg(checkReview.getReviewImg()); // 파일이 없으면 기존 파일 경로 유지
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "fail"; // 파일 업로드 실패 시
-		}
-
-		reviewVO.setUserId(userId);
-		revService.updateReview(reviewVO);
-		return "success";
-	}
+        return "redirect:/supplement/supplementDetail/" + supId; // 리뷰 작성 후 상세 페이지로 리다이렉트
+    }
 }

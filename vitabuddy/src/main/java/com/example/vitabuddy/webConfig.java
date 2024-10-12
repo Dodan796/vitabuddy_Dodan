@@ -1,9 +1,11 @@
 package com.example.vitabuddy;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 
 @Configuration
 public class webConfig implements WebMvcConfigurer {
@@ -17,8 +19,15 @@ public class webConfig implements WebMvcConfigurer {
 	}
 
 	// 정적 리소스 매핑
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/images/**").addResourceLocations("file:///C:/supplement_images/");
-	}
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    	  registry.addResourceHandler("/images/**")
+          .addResourceLocations("file:///C:/supplement_images/");
+    }
+	
+	@Bean
+    public StandardServletMultipartResolver multipartResolver() {
+        return new StandardServletMultipartResolver();
+    }
+	
 }

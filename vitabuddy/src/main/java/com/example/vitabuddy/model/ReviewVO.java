@@ -1,5 +1,6 @@
 package com.example.vitabuddy.model;
 
+
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -7,20 +8,20 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class ReviewVO {
 
 	// 1. 리뷰 필드
-	private String ReviewNo;
-	private String ReviewTitle;
-	private String UserId;
-	private int SupId;
-	private String Rating;
-	private String ReviewHashtag;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date ReviewDate;
-	private String Content;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date StartDate;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date EndDate;
-	private String ReviewImg;
+	private String reviewNo;
+	private String reviewTitle;
+	private String userId;
+	private Integer supId;
+	private String rating;
+	private String reviewHashtag;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date reviewDate;
+	private String content;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date startDate;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date endDate;
+	private String reviewImg;
 
 	// 2. 클래스 초기화
 	public ReviewVO() {
@@ -28,92 +29,93 @@ public class ReviewVO {
 	}
 
 	// 3. getter & setter.
+
 	public String getReviewNo() {
-		return ReviewNo;
+		return reviewNo;
 	}
 
 	public void setReviewNo(String reviewNo) {
-		ReviewNo = reviewNo;
+		this.reviewNo = reviewNo;
 	}
 
 	public String getReviewTitle() {
-		return ReviewTitle;
+		return reviewTitle;
 	}
 
 	public void setReviewTitle(String reviewTitle) {
-		ReviewTitle = reviewTitle;
+		this.reviewTitle = reviewTitle;
 	}
 
 	public String getUserId() {
-		return UserId;
+		return userId;
 	}
 
 	public void setUserId(String userId) {
-		UserId = userId;
+		this.userId = userId;
 	}
 
-	public int getSupId() {
-		return SupId;
+	public Integer getSupId() {
+		return supId;
 	}
 
-	public void setSupId(int supId) {
-		SupId = supId;
+	public void setSupId(Integer supId) {
+		this.supId = supId;
 	}
 
 	public String getRating() {
-		return Rating;
+		return rating;
 	}
 
 	public void setRating(String rating) {
-		Rating = rating;
+		this.rating = rating;
 	}
 
 	public String getReviewHashtag() {
-		return ReviewHashtag;
+		return reviewHashtag;
 	}
 
 	public void setReviewHashtag(String reviewHashtag) {
-		ReviewHashtag = reviewHashtag;
+		this.reviewHashtag = reviewHashtag;
 	}
 
 	public Date getReviewDate() {
-		return ReviewDate;
+		return reviewDate;
 	}
 
 	public void setReviewDate(Date reviewDate) {
-		ReviewDate = reviewDate;
+		this.reviewDate = reviewDate;
 	}
 
 	public String getContent() {
-		return Content;
+		return content;
 	}
 
 	public void setContent(String content) {
-		Content = content;
+		this.content = content;
 	}
 
 	public Date getStartDate() {
-		return StartDate;
+		return startDate;
 	}
 
 	public void setStartDate(Date startDate) {
-		StartDate = startDate;
+		this.startDate = startDate;
 	}
 
 	public Date getEndDate() {
-		return EndDate;
+		return endDate;
 	}
 
 	public void setEndDate(Date endDate) {
-		EndDate = endDate;
+		this.endDate = endDate;
 	}
 
 	public String getReviewImg() {
-		return ReviewImg;
+		return reviewImg;
 	}
 
 	public void setReviewImg(String reviewImg) {
-		ReviewImg = reviewImg;
+		this.reviewImg = reviewImg;
 	}
 
 }

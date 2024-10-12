@@ -21,8 +21,14 @@ public class webSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
 		http.csrf(csrf->csrf.disable())
 			.formLogin(formLogin->formLogin.disable())
-			.headers(headerConfig->headerConfig.frameOptions(frameOptionConfig->frameOptionConfig.disable()));
-		
+			.headers(headerConfig->headerConfig.frameOptions(frameOptionConfig->frameOptionConfig.disable()))
+		 	.authorizeRequests(authz -> authz
+		    .requestMatchers("/uploads").permitAll()); // 파일 업로드 엔드포인트 허용
+		    // 나머지 요청은 인증 필요
 		return http.build();
 	}
+	
+	
+	
+	
 }

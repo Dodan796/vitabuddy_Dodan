@@ -19,9 +19,21 @@ public class HomeController {
 	}
 	
 	// 3. 상품상세페이지
-	@RequestMapping("/supplement")
+	@RequestMapping("/review")
 	public String prdDetail() {
-		return"supplement/supplementDetailView";
+		return"supplement/review";
 	}
+	
+	// 4. 
+	@RequestMapping("/register")
+	public String register() {
+		return "member/register";
+	}
+	
+	// 5. 상품상세페이지
+		@RequestMapping("/review2")
+		public String supDetail() {
+			return"supplement/supplementDetailView";
+		}
 	
 }

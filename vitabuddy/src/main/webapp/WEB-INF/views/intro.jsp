@@ -9,7 +9,6 @@
 
 <c:import url="/WEB-INF/views/layout/head.jsp" />	
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/intro.css'/>">
-<script src="/js/jquery-3.7.1.min.js"></script>
 <script src="/js/login.js"></script>
 </head>
 <body>
@@ -28,7 +27,7 @@
 		</h1>
         <!-- 로그인 폼 -->
         <div class="loginForm">
-            <form action="/users/login" method="post">
+            <form action="/intro/login" method="post">
                 <label for="id">아이디</label>
                 <br>
                 <input type="text" id="id" name="id" class="formTxt" placeholder="아이디" required>

@@ -2,67 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.vitabuddy.dao.IMemberDAO">
+<mapper namespace="com.example.vitabuddy.dao.IReviewDAO">
 
-	<!--ResultMap -->
-	<resultMap id="ReviewResultMap"
+	<!-- ResultMap -->
+	<resultMap id="reviewResultMap"
 		type="com.example.vitabuddy.model.ReviewVO">
-		<result property="ReviewNo" column="REVIEWNO" />
-		<result property="ReviewTitle" column="REVIEWTITLE" />
-		<result property="UserId" column="USERID" />
-		<result property="SupId" column="SUPID" />
-		<result property="Rating" column="RATING" />
-		<result property="ReviewHashtag" column="REVIEWHASHTAG" />
-		<result property="ReviewDate" column="REVIEWDATE" />
-		<result property="Content" column="CONTENT" />
-		<result property="StartDate" column="STARTDATE" />
-		<result property="EndDate" column="ENDDATE" />
-		<result property="ReviewImg" column="REVIEWIMG" />
+		<result property="reviewNo" column="REVIEWNO" />
+		<result property="reviewTitle" column="REVIEWTITLE" />
+		<result property="userId" column="USERID" />
+		<result property="supId" column="SUPID" />
+		<result property="rating" column="RATING" />
+		<result property="reviewHashtag" column="REVIEWHASHTAG" />
+		<result property="reviewDate" column="REVIEWDATE" />
+		<result property="content" column="CONTENT" />
+		<result property="startDate" column="STARTDATE" />
+		<result property="endDate" column="ENDDATE" />
+		<result property="reviewImg" column="REVIEWIMG" />
 	</resultMap>
-
-	<!-- 리뷰 가져오기 (수정 & 삭제를 위한) -->
-	<select id="getReview" parameterType="String"
-		resultMap="ReviewResultMap">
-		SELECT * FROM REVIEW
-		WHERE REVIEWNO = #{ReviewNo}
-	</select>
 
 	<!-- 1. 리뷰 작성 -->
 	<insert id="insertReview"
 		parameterType="com.example.vitabuddy.model.ReviewVO">
-		INSERT INTO REVIEW(REVIEWNO, REVIEWTITLE, USERID, SUPID, RATING,
-		REVIEWHASHTAG, CONTENT, STARTDATE, ENDDATE, REVIEWIMG)
-		VALUES (#{ReviewNo}, #{ReviewTitle}, #{UserId}, #{SupId}, #{Rating},
-		#{ReviewHashtag}, #{Content}, #{StartDate}, #{EndDate},
-		#{ReviewImg})
+		INSERT INTO REVIEW (REVIEWNO, REVIEWTITLE, USERID, SUPID, RATING, REVIEWHASHTAG, REVIEWDATE, CONTENT, STARTDATE, ENDDATE, REVIEWIMG)
+		VALUES (#{reviewNo}, #{reviewTitle}, #{userId}, #{supId}, #{rating}, #{reviewHashtag}, #{reviewDate}, #{content}, #{startDate}, #{endDate}, #{reviewImg})
 	</insert>
 
-	<!-- 2. 리뷰 조회 -->
-	<select id="reviewList" parameterType="int"
-		resultMap="ReviewResultMap">
-		SELECT * FROM REVIEW
-		WHERE SUPID = #{SupId}
-		ORDER BY REVIEWDATE DESC
-	</select>
 
-	<!-- 3. 리뷰 삭제 -->
-	<delete id="deleteReview" parameterType="map">
-		DELETE FROM REVIEW
-		WHERE REVIEWNO=#{ReviewNo} AND USERID=#{UserId}
-	</delete>
+	<!-- 모든 리뷰 조회 -->
+	<select id="getAllReviews" resultType="com.example.vitabuddy.model.ReviewVO">
+    SELECT 
+        REVIEWNO AS reviewNo,
+        REVIEWTITLE AS reviewTitle,
+        USERID AS userId,
+        SUPID AS supId,
+        RATING AS rating,
+        REVIEWHASHTAG AS reviewHashtag,
+        REVIEWDATE AS reviewDate,
+        CONTENT AS content,
+        STARTDATE AS startDate,
+        ENDDATE AS endDate,
+        REVIEWIMG AS reviewImg
+    FROM Review
+</select>
 
-	<!-- 4. 리뷰 수정 -->
-	<update id="updateReview"
-		parameterType="com.example.vitabuddy.model.ReviewVO">
-		UPDATE REVIEW
-		SET REVIEWTITLE = #{ReviewTitle},
-		RATING = #{Rating},
-		REVIEWHASHTAG = #{ReviewHashtag},
-		CONTENT = #{Content},
-		STARTDATE = #{StartDate},
-		ENDDATE = #{EndDate},
-		REVIEWIMG = #{ReviewImg}
-		WHERE REVIEWNO = #{ReviewNo} AND USERID = #{UserId}
-	</update>
+
 
 </mapper>
