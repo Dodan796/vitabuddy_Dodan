@@ -27,5 +27,10 @@ public class MemberService {
     public boolean isUserEmailAvailable(String userEmail) {
         return memberDAO.getUserByEmail(userEmail) == null;
     }
+    
+    // getUserInfo 메서드 추가
+    public MemberDTO getUserInfo(String userId) {
+        return memberDAO.getUserById(userId); // MemberDAO에서 회원 정보 가져오기
+    }
 
 }

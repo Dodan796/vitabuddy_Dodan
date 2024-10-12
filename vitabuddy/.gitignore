@@ -31,3 +31,31 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# 사용자 환경 설정 및 시스템 파일 무시
+.bash_history
+.cache/
+.config/
+.eclipse/
+.gitconfig
+.lesshst
+.m2/
+.p2/
+AppData/
+Contacts/
+Desktop/
+Documents/
+Downloads/
+Favorites/
+Music/
+NTUSER.DAT*
+OneDrive/
+Pictures/
+Saved Games/
+Searches/
+Videos/
+git/
+
+# SQL 파일 무시
+VITABUDDY*.sql
+
