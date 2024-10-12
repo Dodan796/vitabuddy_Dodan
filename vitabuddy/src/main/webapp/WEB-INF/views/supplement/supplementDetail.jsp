@@ -161,7 +161,7 @@
         		
         		<!-- 리뷰목록 -->
         		<div class="reviews">
-        			<c:forEach var="review" items="${reviewList}">
+        			<c:forEach var="review" items="${getReviewList}">
 				        <table class="reviewItem">
 						    <tr><td><h3>${review.reviewTitle}</h3></td><td></td><td></td><td></td></tr>
 						    <tr><td><p>${review.userId}</p></td><td><div class="hashTag">${review.reviewHashTag}</div></td><td></td><td><c:if test="${review.userId == sessionScope.sid}">
