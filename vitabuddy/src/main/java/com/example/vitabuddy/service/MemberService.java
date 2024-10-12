@@ -12,6 +12,11 @@ public class MemberService {
 
     @Autowired
     private MemberDAO memberDAO;
+    
+    public MemberDTO getUserInfo(String userId) {
+        // MemberDAO에서 사용자 정보를 조회
+        return memberDAO.getUserById(userId);
+    }
 
     @Transactional  // 트랜잭션 어노테이션 추가
     public boolean registerMember(MemberDTO member) {

@@ -11,35 +11,41 @@ public class SupplementDetailVO {
     private String supPrecautions;
     private String supDetail;
     private byte[] supImg;
+    private String base64SupImg; // Base64 인코딩된 이미지 필드
 
-    // Getters and Setters
+    // 기존 필드에 대한 Getter/Setter
     public int getSupId() { return supId; }
     public void setSupId(int supId) { this.supId = supId; }
-    
+
     public String getSupName() { return supName; }
     public void setSupName(String supName) { this.supName = supName; }
-    
+
     public int getSupPrice() { return supPrice; }
     public void setSupPrice(int supPrice) { this.supPrice = supPrice; }
-    
+
     public String getSupBrand() { return supBrand; }
     public void setSupBrand(String supBrand) { this.supBrand = supBrand; }
-    
+
     public String getSupDosage() { return supDosage; }
     public void setSupDosage(String supDosage) { this.supDosage = supDosage; }
-    
+
     public String getSupNutri() { return supNutri; }
     public void setSupNutri(String supNutri) { this.supNutri = supNutri; }
-    
+
     public String getSupNutriInfo() { return supNutriInfo; }
     public void setSupNutriInfo(String supNutriInfo) { this.supNutriInfo = supNutriInfo; }
-    
+
     public String getSupPrecautions() { return supPrecautions; }
     public void setSupPrecautions(String supPrecautions) { this.supPrecautions = supPrecautions; }
-    
+
     public String getSupDetail() { return supDetail; }
     public void setSupDetail(String supDetail) { this.supDetail = supDetail; }
-    
+
+    // supImg에 대한 Getter/Setter
     public byte[] getSupImg() { return supImg; }
     public void setSupImg(byte[] supImg) { this.supImg = supImg; }
+
+    // base64SupImg에 대한 Getter/Setter (중복 없이 추가)
+    public String getBase64SupImg() { return base64SupImg; }
+    public void setBase64SupImg(String base64SupImg) { this.base64SupImg = base64SupImg; }
 }
