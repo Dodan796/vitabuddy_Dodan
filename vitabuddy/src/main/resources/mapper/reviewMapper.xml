@@ -23,27 +23,27 @@
 	<!-- 1. 리뷰 작성 -->
 	<insert id="insertReview"
 		parameterType="com.example.vitabuddy.model.ReviewVO">
-		INSERT INTO REVIEW (REVIEWNO, REVIEWTITLE, USERID, SUPID, RATING, REVIEWHASHTAG, REVIEWDATE, CONTENT, STARTDATE, ENDDATE, REVIEWIMG)
-		VALUES (#{reviewNo}, #{reviewTitle}, #{userId}, #{supId}, #{rating}, #{reviewHashtag}, #{reviewDate}, #{content}, #{startDate}, #{endDate}, #{reviewImg})
+		INSERT INTO REVIEW (REVIEWNO, REVIEWTITLE, USERID,
+		SUPID, RATING, REVIEWHASHTAG, REVIEWDATE, CONTENT, STARTDATE, ENDDATE,
+		REVIEWIMG)
+		VALUES (#{reviewNo}, #{reviewTitle}, #{userId}, #{supId},
+		#{rating}, #{reviewHashtag}, #{reviewDate}, #{content}, #{startDate},
+		#{endDate}, #{reviewImg})
 	</insert>
 
 
 	<!-- 모든 리뷰 조회 -->
-	<select id="getAllReviews" resultType="com.example.vitabuddy.model.ReviewVO">
-    SELECT 
-        REVIEWNO AS reviewNo,
-        REVIEWTITLE AS reviewTitle,
-        USERID AS userId,
-        SUPID AS supId,
-        RATING AS rating,
-        REVIEWHASHTAG AS reviewHashtag,
-        REVIEWDATE AS reviewDate,
-        CONTENT AS content,
-        STARTDATE AS startDate,
-        ENDDATE AS endDate,
-        REVIEWIMG AS reviewImg
-    FROM Review
-</select>
+	<select id="reviewLists" parameterType="int"
+		resultType="com.example.vitabuddy.model.ReviewVO">
+		SELECT REVIEWNO AS reviewNo, REVIEWTITLE AS reviewTitle, USERID AS userId,
+		SUPID AS supId,
+		RATING AS rating, REVIEWHASHTAG AS reviewHashtag, REVIEWDATE AS reviewDate,
+		CONTENT AS content, STARTDATE AS startDate, ENDDATE AS endDate,
+		REVIEWIMG AS reviewImg
+		FROM Review
+		WHERE SUPID = #{supId}
+	</select>
+
 
 
 

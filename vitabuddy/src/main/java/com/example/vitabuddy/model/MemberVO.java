@@ -7,17 +7,12 @@ public class MemberVO {
 	private String userId;
 	private String userPwd;
 	private String userEmail;
-	private String userPH;
+	private String userPh;
 	private String userZipcode;
 	private String userAddress1;
 	private String userAddress2;
 
-	// 2. VO클래스 초기화
-	public MemberVO() {
-
-	}
-
-	// 3. getter & setter
+	// 2. getter & setter
 	public String getUserName() {
 		return userName;
 	}
@@ -50,12 +45,12 @@ public class MemberVO {
 		this.userEmail = userEmail;
 	}
 
-	public String getUserPH() {
-		return userPH;
+	public String getUserPh() {
+		return userPh;
 	}
 
-	public void setUserPH(String userPH) {
-		this.userPH = userPH;
+	public void setUserPh(String userPh) {
+		this.userPh = userPh;
 	}
 
 	public String getUserZipcode() {

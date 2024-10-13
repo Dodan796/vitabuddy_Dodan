@@ -37,15 +37,16 @@ public class ReviewController {
 
     // 2. 리뷰 작성 처리 (회원만 가능)
     @PostMapping("/supplementDetail/{supId}/review")
-    public String insertReview(@PathVariable("supId") int supId,   						   
-    						   @RequestParam("reviewTitle") String reviewTitle,
-                               @RequestParam("rating") String rating,
-                               @RequestParam("reviewHashtag") String reviewHashtag,
-                               @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
-                               @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
-                               @RequestParam("content") String content,
-                               @RequestParam(value = "reviewImg", required = false) List<MultipartFile> reviewImgFiles,
-                               HttpSession session) {
+    public String insertReview(
+            @PathVariable("supId") int supId,
+            @RequestParam("reviewTitle") String reviewTitle,
+            @RequestParam("rating") String rating,
+            @RequestParam("reviewHashtag") String reviewHashtag,
+            @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+            @RequestParam("content") String content,
+            @RequestParam(value = "reviewImg", required = false) List<MultipartFile> reviewImgFiles,
+            HttpSession session) {
 
         // 로그인 여부 확인
         String userId = (String) session.getAttribute("sid");
@@ -54,7 +55,6 @@ public class ReviewController {
         }
 
         ReviewVO reviewVO = new ReviewVO();
-        // 고유한 REVIEWNO 생성
         String reviewNo = UUID.randomUUID().toString();
         reviewVO.setReviewNo(reviewNo);
         reviewVO.setSupId(supId);
@@ -73,7 +73,6 @@ public class ReviewController {
             for (int i = 0; i < Math.min(3, reviewImgFiles.size()); i++) {
                 MultipartFile file = reviewImgFiles.get(i);
                 if (!file.isEmpty()) {
-                    // 고유 파일명 생성 (UUID 사용)
                     String originalFilename = file.getOriginalFilename();
                     String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
                     String uniqueFileName = UUID.randomUUID().toString() + extension;
@@ -82,7 +81,12 @@ public class ReviewController {
                     try {
                         File destFile = new File(UPLOAD_DIR + uniqueFileName);
                         file.transferTo(destFile);
-                        imageNames.append(uniqueFileName).append(";");
+                        imageNames.append(uniqueFileName);
+
+                        // 마지막 파일이 아니면 세미콜론 추가
+                        if (i < Math.min(3, reviewImgFiles.size()) - 1) {
+                            imageNames.append(";");
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                         return "error/fileUploadError"; // 파일 저장 실패 시 에러 페이지로 이동
@@ -91,8 +95,8 @@ public class ReviewController {
             }
         }
 
-        // 이미지 파일명을 reviewVO에 설정
-        reviewVO.setReviewImg(imageNames.toString());
+        // 이미지 파일명을 reviewVO에 설정 (빈 경우 빈 문자열 저장)
+        reviewVO.setReviewImg(imageNames.length() > 0 ? imageNames.toString() : "");
 
         // 리뷰 저장
         int result = reviewService.insertReview(reviewVO);
