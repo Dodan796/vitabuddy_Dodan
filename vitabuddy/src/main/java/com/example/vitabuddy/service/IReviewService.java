@@ -11,5 +11,8 @@ public interface IReviewService {
 
 	// 리뷰 작성 기능
 	int insertReview(ReviewVO review);
+	
+	// 리뷰 삭제 기능
+		int deleteReview(String reviewNo, String userId);
 
 }

@@ -101,9 +101,38 @@ public class ReviewController {
         // 리뷰 저장
         int result = reviewService.insertReview(reviewVO);
         if (result == -1) {
-            return "error/fileUploadError"; // 파일 저장 실패 시 에러 페이지로 이동
+        	// 파일 저장 실패 시 에러 페이지로 이동
+            return "error/fileUploadError"; 
         }
-
-        return "redirect:/supplement/supplementDetail/" + supId; // 리뷰 작성 후 상세 페이지로 리다이렉트
+        	// 리뷰 작성 후 상세 페이지로 리다이렉트
+        return "redirect:/supplement/supplementDetail/" + supId; 
     }
+    
+    // 3. 리뷰 삭제
+    @PostMapping("/supplementDetail/{supId}/review/{reviewNo}/delete")
+    public String deleteReview(@PathVariable("supId") int supId, @PathVariable("reviewNo") String reviewNo, HttpSession session) {
+    	
+    	// 로그인 확인
+    	String userId = (String) session.getAttribute("sid");
+    	if(userId==null) {
+    		return "redirect:/intro";
+    	}
+    	
+    	// 삭제 로직
+    	int result =reviewService.deleteReview(reviewNo, userId);
+    	if(result == 0) {
+    		return "삭제실패";
+    	}
+    	
+    	return "redirect:/supplement/supplementDetail/" + supId;
+    	
+    	
+    	
+    }
+    
+    
+    
+    
+    
+    
 }
