@@ -201,6 +201,12 @@
 							</c:if>
 						</td>
 						<!-- 리뷰 삭제 -->
+						<%-- <td>
+					    		<c:if test="${review.userId == sessionScope.sid}">
+									<a href="#" class="deleteReview" data-review-id="${review.userId}">리뷰삭제</a>
+					    		</c:if>
+							</td> --%>
+						<!-- 리뷰삭제 수정된 부분 -->
 						<td>
 							<c:if test="${review.userId == sessionScope.sid}">
                     			<form method="post" action="/supplement/supplementDetail/${sup.supId}/review/${review.reviewNo}/delete" style="display:inline;">

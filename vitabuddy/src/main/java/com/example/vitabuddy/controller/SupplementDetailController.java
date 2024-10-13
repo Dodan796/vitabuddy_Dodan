@@ -29,7 +29,7 @@ public class SupplementDetailController {
         SupplementDetailVO detail = supplementDetailService.getSupplementDetailById(supplementDetailId);
         model.addAttribute("sup", detail);
 
-        // 2. 리뷰 목록 조회
+        // 2. 리뷰 목록 조회 => 팀장님 코드에서 추가된 부분입니다. 
         List<ReviewVO> reviews = reviewService.reviewLists(supplementDetailId); // supId에 해당하는 리뷰 목록 조회
         model.addAttribute("reviewList", reviews);
 

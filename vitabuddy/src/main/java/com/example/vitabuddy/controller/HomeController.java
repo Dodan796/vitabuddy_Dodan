@@ -36,4 +36,10 @@ public class HomeController {
 			return"supplement/supplementDetailView";
 		}
 	
+	// 6. edit review
+		@RequestMapping("/edit")
+		public String edit() {
+			return "supplement/editReview";
+		}
+		
 }
