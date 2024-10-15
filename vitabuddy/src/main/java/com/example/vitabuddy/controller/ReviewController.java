@@ -37,16 +37,15 @@ public class ReviewController {
 
     // 2. 리뷰 작성 처리 (회원만 가능)
     @PostMapping("/supplementDetail/{supId}/review")
-    public String insertReview(
-            @PathVariable("supId") int supId,
-            @RequestParam("reviewTitle") String reviewTitle,
-            @RequestParam("rating") String rating,
-            @RequestParam("reviewHashtag") String reviewHashtag,
-            @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
-            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
-            @RequestParam("content") String content,
-            @RequestParam(value = "reviewImg", required = false) List<MultipartFile> reviewImgFiles,
-            HttpSession session) {
+    public String insertReview(@PathVariable("supId") int supId,
+                               @RequestParam("reviewTitle") String reviewTitle,
+                               @RequestParam("rating") String rating,
+                               @RequestParam("reviewHashtag") String reviewHashtag,
+                               @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+                               @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
+                               @RequestParam("content") String content,
+                               @RequestParam(value = "reviewImg", required = false) List<MultipartFile> reviewImgFiles,
+                               HttpSession session) {
 
         // 로그인 여부 확인
         String userId = (String) session.getAttribute("sid");
@@ -55,7 +54,7 @@ public class ReviewController {
         }
 
         ReviewVO reviewVO = new ReviewVO();
-        String reviewNo = UUID.randomUUID().toString();
+        String reviewNo = UUID.randomUUID().toString();  // 리뷰 ID는 UUID로 생성
         reviewVO.setReviewNo(reviewNo);
         reviewVO.setSupId(supId);
         reviewVO.setUserId(userId);
@@ -75,7 +74,11 @@ public class ReviewController {
                 if (!file.isEmpty()) {
                     String originalFilename = file.getOriginalFilename();
                     String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
-                    String uniqueFileName = UUID.randomUUID().toString() + extension;
+                    String baseName = originalFilename.substring(0, originalFilename.lastIndexOf("."));
+
+                    // 파일명 중복 방지를 위해 타임스탬프를 추가
+                    String timestamp = String.valueOf(System.currentTimeMillis());
+                    String uniqueFileName = baseName + "_" + timestamp + extension;
 
                     // 파일 저장
                     try {
@@ -101,12 +104,13 @@ public class ReviewController {
         // 리뷰 저장
         int result = reviewService.insertReview(reviewVO);
         if (result == -1) {
-        	// 파일 저장 실패 시 에러 페이지로 이동
-            return "error/fileUploadError"; 
+            return "error/fileUploadError";  // 저장 실패 시 에러 페이지로 이동
         }
-        	// 리뷰 작성 후 상세 페이지로 리다이렉트
-        return "redirect:/supplement/supplementDetail/" + supId; 
+
+        // 리뷰 작성 후 상세 페이지로 리다이렉트
+        return "redirect:/supplement/supplementDetail/" + supId;
     }
+
     
     // 3. 리뷰 삭제
     @PostMapping("/supplementDetail/{supId}/review/{reviewNo}/delete")
@@ -124,10 +128,7 @@ public class ReviewController {
     		return "삭제실패";
     	}
     	
-    	return "redirect:/supplement/supplementDetail/" + supId;
-    	
-    	
-    	
+    	return "redirect:/supplement/supplementDetail/" + supId;  	
     }
     
     

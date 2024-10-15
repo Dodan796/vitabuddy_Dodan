@@ -195,11 +195,22 @@
 					<tr>
 						<td colspan="5"><h3>${review.reviewTitle}</h3></td>
 						<!-- 리뷰 수정 -->
-						<td>
+						<%-- <td>
 							<c:if test="${review.userId == sessionScope.sid}">
 							<a href="#" class="correctReview" data-review-id="${review.userId}">수정</a>
 							</c:if>
+						</td> --%>
+						<td>
+						    <c:if test="${review.userId == sessionScope.sid}">
+						        <form method="get" 
+						              action="#" 
+						              onsubmit="openReviewEditPopup('${sup.supId}', '${review.reviewNo}'); return false;" 
+						              style="display:inline;">
+						            <button type="submit">수정</button>
+						        </form>
+						    </c:if>
 						</td>
+						
 						<!-- 리뷰 삭제 -->
 						<%-- <td>
 					    		<c:if test="${review.userId == sessionScope.sid}">
@@ -210,7 +221,7 @@
 						<td>
 							<c:if test="${review.userId == sessionScope.sid}">
                     			<form method="post" action="/supplement/supplementDetail/${sup.supId}/review/${review.reviewNo}/delete" style="display:inline;">
-                        			<button type="submit">리뷰 삭제</button>
+                        			<button type="submit">삭제</button>
                     			</form>
                 			</c:if>
                 		</td>
