@@ -23,4 +23,8 @@ public class MemberDAO {
     public MemberDTO getUserByEmail(String userEmail) {
         return sqlSession.selectOne("MemberMapper.selectUserByEmail", userEmail);
     }
+    
+    public String getPasswordByUserId(String userId) {
+        return sqlSession.selectOne("MemberMapper.selectPasswordByUserId", userId);
+    }
 }

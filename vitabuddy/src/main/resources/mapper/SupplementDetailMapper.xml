@@ -5,8 +5,8 @@
 <mapper namespace="com.example.vitabuddy.dao.SupplementDetailDAO">
     <select id="getSupplementDetailById" parameterType="int" resultType="com.example.vitabuddy.model.SupplementDetailVO">
         SELECT SupID as supId, SupName as supName, SupPrice as supPrice, SupBrand as supBrand,
-               SupDetail as supDetail, SupNutriInfo as supNutriInfo, SupDosage as supDosage,
-               SupPrecautions as supPrecautions, SupImg as supImg
+               SupDetail as supDetail, SupNutri as supNutri, SupNutriInfo as supNutriInfo, 
+               SupDosage as supDosage, SupPrecautions as supPrecautions, SupImg as supImg
         FROM supplement
         WHERE SupID = #{supId}
     </select>
