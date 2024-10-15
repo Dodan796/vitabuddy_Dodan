@@ -42,4 +42,10 @@ public class HomeController {
 			return "supplement/editReview";
 		}
 		
+	// 7. mypage
+		@RequestMapping("/mypage")
+		public String mypage() {
+			return "mypage";
+		}
+		
 }
