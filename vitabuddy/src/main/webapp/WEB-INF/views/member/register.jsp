@@ -10,6 +10,7 @@
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <title>비타버디 가입하기</title>
     <link rel="stylesheet" type="text/css" href="<c:url value='/css/common.css'/>">
+     <link rel="stylesheet" type="text/css" href="<c:url value='/css/register.css'/>">
     <script src="<c:url value='/js/register.js'/>"></script> <!-- JS 파일을 추가 -->
     <jsp:include page="/WEB-INF/views/layout/head.jsp" />
 </head>
