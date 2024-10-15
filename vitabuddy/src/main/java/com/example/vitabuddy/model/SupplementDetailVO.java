@@ -13,8 +13,7 @@ public class SupplementDetailVO {
 	private byte[] supImg;
 	private String base64SupImg; // Base64 인코딩된 이미지 필드
 
-	// Getter/Setter
-
+	// 기존 필드에 대한 Getter/Setter
 	public int getSupId() {
 		return supId;
 	}
@@ -87,6 +86,7 @@ public class SupplementDetailVO {
 		this.supDetail = supDetail;
 	}
 
+	// supImg에 대한 Getter/Setter
 	public byte[] getSupImg() {
 		return supImg;
 	}
@@ -95,6 +95,7 @@ public class SupplementDetailVO {
 		this.supImg = supImg;
 	}
 
+	// base64SupImg에 대한 Getter/Setter (중복 없이 추가)
 	public String getBase64SupImg() {
 		return base64SupImg;
 	}
@@ -102,5 +103,4 @@ public class SupplementDetailVO {
 	public void setBase64SupImg(String base64SupImg) {
 		this.base64SupImg = base64SupImg;
 	}
-
 }

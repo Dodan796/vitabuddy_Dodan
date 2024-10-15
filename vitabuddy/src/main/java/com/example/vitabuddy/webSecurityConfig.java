@@ -14,19 +14,15 @@ public class webSecurityConfig {
 	
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
-		return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder(); 
 	}
 	
 	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http)throws Exception{
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 		http.csrf(csrf->csrf.disable())
 			.formLogin(formLogin->formLogin.disable())
-			.headers(headerConfig->headerConfig.frameOptions(frameOptionConfig->frameOptionConfig.disable()));
-		    // 나머지 요청은 인증 필요
-		return http.build();
+			.headers(headerConfig->headerConfig.frameOptions(frameOptionsConfig->frameOptionsConfig.disable()));
+		
+			return http.build();
 	}
-	
-	
-	
-	
 }

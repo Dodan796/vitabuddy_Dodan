@@ -9,3 +9,5 @@ CREATE TABLE users (
     UserAddress2 VARCHAR2(50) NOT NULL,             
     PRIMARY KEY (UserID)                   
 );
+
+

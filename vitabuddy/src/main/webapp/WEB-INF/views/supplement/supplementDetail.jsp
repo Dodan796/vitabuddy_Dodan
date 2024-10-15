@@ -1,8 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +10,8 @@
 <script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
 <script src="<c:url value='/js/rating.js'/>"></script>
 <!-- css 링크 수정 -->
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/supplementDetail.css'/>">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value='/css/supplementDetail.css'/>">
 <c:import url="/WEB-INF/views/layout/head.jsp" />
 </head>
 <body>
@@ -22,13 +22,13 @@
 
 		<div class="prdProfile">
 
-			<br>
-			<br>
+			<br> <br>
 			<table>
 				<tr>
 					<td><h2>${sup.supName}</h2></td>
 					<td></td>
-					<img class="prdImg" src="data:image/png;base64,${sup.base64SupImg}" width="300" height="300">
+					<img class="prdImg" src="data:image/png;base64,${sup.base64SupImg}"
+						width="300" height="300">
 
 				</tr>
 				<!-- 별점 -->
@@ -179,9 +179,8 @@
 				<textarea class="reviewTxt" name="content" cols="150" rows="5">${review.content}</textarea>
 				<br>
 				<!-- 사진 첨부 -->
-				<input class="Upload" type="file" id="uploadFile" name="reviewImg" multiple>
-
-				<br>
+				<input class="Upload" type="file" id="uploadFile" name="reviewImg"
+					multiple> <br>
 
 				<!-- submit -->
 				<input type="submit" value="작성하기" class="btn btnFilled">
@@ -200,17 +199,14 @@
 							<a href="#" class="correctReview" data-review-id="${review.userId}">수정</a>
 							</c:if>
 						</td> --%>
-						<td>
-						    <c:if test="${review.userId == sessionScope.sid}">
-						        <form method="get" 
-						              action="#" 
-						              onsubmit="openReviewEditPopup('${sup.supId}', '${review.reviewNo}'); return false;" 
-						              style="display:inline;">
-						            <button type="submit">수정</button>
-						        </form>
-						    </c:if>
-						</td>
-						
+						<td><c:if test="${review.userId == sessionScope.sid}">
+								<form method="get" action="#"
+									onsubmit="openReviewEditPopup('${sup.supId}', '${review.reviewNo}'); return false;"
+									style="display: inline;">
+									<button type="submit">수정</button>
+								</form>
+							</c:if></td>
+
 						<!-- 리뷰 삭제 -->
 						<%-- <td>
 					    		<c:if test="${review.userId == sessionScope.sid}">
@@ -218,27 +214,30 @@
 					    		</c:if>
 							</td> --%>
 						<!-- 리뷰삭제 수정된 부분 -->
-						<td>
-							<c:if test="${review.userId == sessionScope.sid}">
-                    			<form method="post" action="/supplement/supplementDetail/${sup.supId}/review/${review.reviewNo}/delete" style="display:inline;">
-                        			<button type="submit">삭제</button>
-                    			</form>
-                			</c:if>
-                		</td>
+						<td><c:if test="${review.userId == sessionScope.sid}">
+								<form method="post"
+									action="/supplement/supplementDetail/${sup.supId}/review/${review.reviewNo}/delete"
+									style="display: inline;">
+									<button type="submit">삭제</button>
+								</form>
+							</c:if></td>
 					</tr>
 
 					<!-- 작성자 정보 -->
 					<tr>
 						<td colspan="4" class="userInfo">
 							<p>작성자: ${review.userId}</p> <br>
-							<p>작성일: <fmt:formatDate value="${review.reviewDate}" pattern="yyyy-MM-dd" /></p>
+							<p>
+								작성일:
+								<fmt:formatDate value="${review.reviewDate}"
+									pattern="yyyy-MM-dd" />
+							</p>
 						</td>
 						<!-- 이미지 파일 출력 -->
-			            <c:forEach var="img" items="${fn:split(review.reviewImg, ';')}">
-			                <td class="reviewImg">
-			                    <img class="reviewImg" src="/Review_Upload/${img}" width="80" height="80">
-			                </td>
-			            </c:forEach>
+						<c:forEach var="img" items="${fn:split(review.reviewImg, ';')}">
+							<td class="reviewImg"><img class="reviewImg"
+								src="/Review_Upload/${img}" width="80" height="80"></td>
+						</c:forEach>
 					</tr>
 					<!-- 리뷰 내용 -->
 					<tr>
@@ -250,12 +249,15 @@
 					<tr class="supInfo">
 						<td colspan="3"></td>
 						<td>복용기간:</td>
-						<td><fmt:formatDate value="${review.startDate}" pattern="yyyy-MM-dd" /> ~ <fmt:formatDate value="${review.endDate}" pattern="yyyy-MM-dd" /></td>
+						<td><fmt:formatDate value="${review.startDate}"
+								pattern="yyyy-MM-dd" /> ~ <fmt:formatDate
+								value="${review.endDate}" pattern="yyyy-MM-dd" /></td>
 						<td>해시태그: ${review.reviewHashtag}</td>
 						<td>
 							<div class="rate">
 								<c:forEach var="i" begin="1" end="5">
-									<i class="${i <= review.rating ? 'fa-solid fa-star' : 'fa-regular fa-star'}"></i>
+									<i
+										class="${i <= review.rating ? 'fa-solid fa-star' : 'fa-regular fa-star'}"></i>
 								</c:forEach>
 							</div>
 						</td>
@@ -293,4 +295,5 @@
 
 	</div>
 </body>
+
 </html>
