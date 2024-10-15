@@ -37,3 +37,8 @@ public class SupplementDetailController {
         return "supplement/supplementDetail"; // 상품 상세 정보와 리뷰 목록을 보여주는 JSP 파일
     }
 }
+
+
+
+
+

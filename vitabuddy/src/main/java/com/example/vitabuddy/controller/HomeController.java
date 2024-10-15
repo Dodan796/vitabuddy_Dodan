@@ -45,7 +45,7 @@ public class HomeController {
 	// 7. mypage
 		@RequestMapping("/mypage")
 		public String mypage() {
-			return "mypage";
+			return "myPage";
 		}
 		
 }

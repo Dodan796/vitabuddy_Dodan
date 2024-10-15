@@ -1,16 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
-<html>
+<html> 
+
 <head>
-<link rel="stylesheet" href="myPage.css" >
-<link rel="stylesheet" href="header.css" >
-<meta charset="UTF-8">
+<meta charset="UTF-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>마이페이지</title>
-<c:import url="/WEB-INF/views/layout/head.jsp" />
+<c:import url="/WEB-INF/views/layout/head.jsp"/> 
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>">
+<script src="https://kit.fontawesome.com/567f0760c2.js" crossorigin="anonymous"></script>
 </head>
+
+
 <body>
-	<%@ include file="/WEB-INF/views/layout/top.jsp" %><!-- 탑 경로  및 명령어 수정 -->
+	<c:import url="/WEB-INF/views/layout/top.jsp"/> 
 	<section id="wrap">
 		<div class="container">
 			<div class="headers">
@@ -23,10 +29,12 @@
 					<label>복용 중인 영양제</label> <!--이거 데이터 들어오면 수정 요망-->
 			        <textarea textarea rows="10%" cols="100%" value="${getMember.getUserTabletList()}"  readonly></textarea>
 					<label>올바른 영양제 복용법</label>
-					<textarea textarea rows="10%" cols="100%"readonly></textarea>	
+					<textarea textarea rows="10%" cols="100%" readonly></textarea>
+						
 				</form>
+				<button class="submit-btn" onclick="location.href='/member/myInfoChangeForm'">정보 수정하기 </button>
 			</div>
-			<button class="submit-btn" onclick="location.href='infoChange.jsp'">정보 수정하기 </button>
+			
 			<div>
 				<div class="review-section">
 				 	내가 작성한 리뷰 목록
@@ -92,7 +100,8 @@
 			</div>
 		</div>
 	</section>
-	<!--  footer -->
-		<c:import url="/WEB-INF/views/layout/footer.jsp" />
+	<c:import url="/WEB-INF/views/layout/footer.jsp"/>
+
 </body>
+
 </html>

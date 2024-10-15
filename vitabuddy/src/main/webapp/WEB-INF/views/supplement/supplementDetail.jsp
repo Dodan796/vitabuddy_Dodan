@@ -28,8 +28,8 @@
 				<tr>
 					<td><h2>${sup.supName}</h2></td>
 					<td></td>
-					<td rowspan="5"><img class="prdImg" src="${sup.supImg}"
-						width="300" height="300"></td>
+					<img class="prdImg" src="data:image/png;base64,${sup.base64SupImg}" width="300" height="300">
+
 				</tr>
 				<!-- 별점 -->
 				<tr>
