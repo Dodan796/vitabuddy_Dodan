@@ -37,4 +37,17 @@ public class ReviewService implements IReviewService {
 		return dao.deleteReview(reviewNo, userId);
 	}
 
+	// 리뷰 수정 기능
+	@Override
+	public int updateReview(ReviewVO review) {
+	    return dao.updateReview(review);
+	}
+
+	// 리뷰 번호를 통한 리뷰 조회.
+	@Override
+	public ReviewVO getReviewByNo(String reviewNo) {
+	    return dao.getReviewByNo(reviewNo);
+	}
+
+	
 }
