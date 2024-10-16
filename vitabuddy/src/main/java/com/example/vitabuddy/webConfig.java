@@ -21,8 +21,8 @@ public class webConfig implements WebMvcConfigurer {
 	// 정적 리소스 매핑
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    	  registry.addResourceHandler("/images/**")
-          .addResourceLocations("file:///C:/supplement_images/");
+    	registry.addResourceHandler("/images/**")
+    	.addResourceLocations("file:///C:/supplement_images/");
     	  
     	  registry.addResourceHandler("/Review_Upload/**")
           .addResourceLocations("file:///C:/Review_Upload/");

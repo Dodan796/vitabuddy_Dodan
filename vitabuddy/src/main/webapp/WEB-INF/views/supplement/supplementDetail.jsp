@@ -10,6 +10,9 @@
 <title>상품 상세 조회</title>
 <script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
 <script src="<c:url value='/js/rating.js'/>"></script>
+<script src="<c:url value='/js/deleteReview.js'/>"></script>
+<script src="<c:url value='/js/editReviewForm.js'/>"></script>
+<%-- <script src="<c:url value='/js/editReview.js'/>" defer></script> --%>
 <!-- css 링크 수정 -->
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/supplementDetail.css'/>">
 <c:import url="/WEB-INF/views/layout/head.jsp" />
@@ -20,96 +23,114 @@
 
 		<c:import url="/WEB-INF/views/layout/top.jsp" />
 
-		<div class="prdProfile">
-
-			<br>
-			<br>
-			<table>
-				<tr>
-					<td><h2>${sup.supName}</h2></td>
-					<td></td>
-					<td rowspan="5"><img class="prdImg" src="${sup.supImg}"
-						width="300" height="300"></td>
-				</tr>
-				<!-- 별점 -->
-				<tr>
-					<td>
-						<%-- <div class="rating">
-			<c:forEach var="i" begin="1" end="5">
-	            <i class="${i <= sup.rating ? 'fa-solid fa-star' : 'fa-regular fa-star'}"></i>
-	        </c:forEach>
-	        </div> --%>
-					</td>
-					<td></td>
-					<td></td>
-				</tr>
-
-				<tr>
-					<td>
-						<%-- <div class="hashTag"> 
-			${sup.supTag} --%>
-						</div>
-					</td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td><a href="#" id="addWish" data-prd-id="${sup.supId}">찜목록
-							추가</a></td>
-					<td><a href="#" id="addCart" data-prd-id="${sup.supId}">장바구니
-							추가</a></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>가격</td>
-					<td><span id="price" data-price="${sup.supPrice}"> <fmt:formatNumber
-								value="${sup.supPrice}" pattern="#,###" /></span> 원</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>브랜드</td>
-					<td>${sup.supBrand}</td>
-					<td></td>
-				</tr>
-			</table>
-
-		</div>
-
-		<br>
-
-		<!-- 상품 상세 정보 -->
-		<div class="prdInfo">
-			<h2>상품 상세 정보</h2>
-			<div>
-				<h3>상품설명</h3>
-				<p>${sup.supDetail}</p>
-			</div>
-			<div>
-				<h3>복용법</h3>
-				<p>${sup.supDosage}</p>
-			</div>
-			<div>
-				<h3>주의사항</h3>
-				<p>${sup.supPrecautions}</p>
-			</div>
-			<div>
-				<h3>영양정보</h3>
-				<table>
-					<tr>
-						<td>${sup.supNutri}</td>
-						<td>${sup.supNutriInfo}</td>
-					</tr>
-				</table>
-			</div>
-		</div>
+		  <!-- 상품 프로필 -->
+            <section class="prdProfile">
+                <br><br>
+                <table>
+                    <tr>
+                        <td colspan="4">
+                            <h2>${supplementDetail.supName}</h2>
+                        </td>
+                        <td rowspan="6">
+                            <!-- 이미지 표시 방식 수정: Base64 인코딩으로 변환된 이미지를 표시 -->
+                            <img class="prdImg" src="data:image/png;base64,${supImgBase64}" width="300" height="300" alt="Product Image">
+                        </td>
+                    </tr>
+                    <!-- 별점 -->
+                    <tr>
+                        <td>
+                                  <%-- <div class="rating">
+             <c:forEach var="i" begin="1" end="5">
+                   <i class="${i <= sup.rating ? 'fa-solid fa-star' : 'fa-regular fa-star'}"></i>
+               </c:forEach>
+               </div> --%>
+                   </td>
+                   <td></td>
+                   <td></td>
+                </tr>
+    
+                <tr>
+                   <td>
+                      <%-- <div class="hashTag"> 
+             ${sup.supTag} --%>
+                            </div>
+                        </td>
+                        <td></td><td></td><td></td><td></td>
+                    </tr>
+                    <!-- 찜목록 및 장바구니 추가 -->
+                    <tr>
+                        <td colspan="2">
+                            <a href="#" id="addWish" data-prd-id="${supplementDetail.supId}">찜목록 추가</a>
+                        </td>
+                        <td colspan="2">
+                            <a href="#" id="addCart" data-prd-id="${supplementDetail.supId}">장바구니 추가</a>
+                        </td>
+                        <td></td>
+                    </tr>
+                    <!-- 가격 정보 -->
+                    <tr>
+                        <td>가격</td>
+                        <td>
+                            <span id="price" data-price="${supplementDetail.supPrice}">
+                                <fmt:formatNumber value="${supplementDetail.supPrice}" pattern="#,###" />
+                            </span> 원
+                        </td>
+                        <td></td><td></td>
+                    </tr>
+                    <!-- 브랜드 정보 -->
+                    <tr>
+                        <td>브랜드</td>
+                        <td>${supplementDetail.supBrand}</td>
+                        <td></td><td></td>
+                    </tr>
+                </table>
+            </section>
+            
+            <br>
+            
+            <!-- 상품 상세 정보 -->
+            <section class="prdInfo">
+                <h2>상품 상세 정보</h2>
+                <div>
+                    <!-- 상품 설명 -->
+                    <div>
+                        <h3>상품설명</h3>
+                        <p>${supplementDetail.supDetail}</p>
+                    </div>
+                    
+                    <!-- 복용법 -->
+                    <div>
+                        <h3>복용법</h3>
+                        <p>${supplementDetail.supDosage}</p>
+                    </div>
+                    
+                    <!-- 주의사항 -->
+                    <div>
+                        <h3>주의사항</h3>
+                        <p>${supplementDetail.supPrecautions}</p>
+                    </div>
+                    
+                    <!-- 영양 정보 -->
+                    <div>
+                        <h3>영양정보</h3>
+                        <table>
+                            <tr>
+                                <td>${supplementDetail.supNutri}</td>
+                                <td>${supplementDetail.supNutriInfo}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+            </section>
 
 		<!-- 리뷰작성 -->
 		<div class="reviewWrite">
 			<form method="post" id="reviewForm" enctype="multipart/form-data"
-				action="/supplement/supplementDetail/${sup.supId}/review">
+				action="/supplement/supplementDetail/${supplementDetail.supId}/review">
 				<input type="hidden" name="reviewNo" value="${review.reviewNo}">
 				<input type="hidden" name="userId" value="${sessionScope.sid}">
-				<input type="hidden" name="supId" value="${sup.supId}">
+				<input type="hidden" name="supId" value="${supplementDetail.supId}">
 				<!-- 리뷰 제목 -->
 				<label>리뷰제목</label> <br> <input class="reviewTitle" type="text"
 					name="reviewTitle" value="${review.reviewTitle}"> <br>
@@ -202,12 +223,12 @@
 						</td> --%>
 						<td>
 						    <c:if test="${review.userId == sessionScope.sid}">
-						        <form method="get" 
-						              action="#" 
-						              onsubmit="openReviewEditPopup('${sup.supId}', '${review.reviewNo}'); return false;" 
-						              style="display:inline;">
-						            <button type="submit">수정</button>
-						        </form>
+						        <button 
+						            class="editButton" 
+						            data-sup-id="${supplementDetail.supId}" 
+						            data-review-no="${review.reviewNo}">
+						            수정
+						        </button>
 						    </c:if>
 						</td>
 						
@@ -219,12 +240,14 @@
 							</td> --%>
 						<!-- 리뷰삭제 수정된 부분 -->
 						<td>
-							<c:if test="${review.userId == sessionScope.sid}">
-                    			<form method="post" action="/supplement/supplementDetail/${sup.supId}/review/${review.reviewNo}/delete" style="display:inline;">
-                        			<button type="submit">삭제</button>
-                    			</form>
-                			</c:if>
-                		</td>
+						    <c:if test="${review.userId == sessionScope.sid}">
+						        <button class="deleteReview" 
+						                data-review-id="${review.reviewNo}" 
+						                data-sup-id="${supplementDetail.supId}">
+						            삭제
+						        </button>
+						    </c:if>
+						</td>
 					</tr>
 
 					<!-- 작성자 정보 -->
