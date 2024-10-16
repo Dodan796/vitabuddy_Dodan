@@ -9,10 +9,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>상품 상세 조회</title>
-		<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
-		<script src="<c:url value='/js/rating.js'/>"></script>
-		<script src="<c:url value='/js/review.js'/>"></script>
-		
+			<script src="<c:url value='/js/jquery-3.7.1.min.js'/>"></script>
+			<script src="<c:url value='/js/rating.js'/>"></script>
+			<script src="<c:url value='/js/deleteReview.js'/>"></script>
+			<script src="<c:url value='/js/editReviewForm.js'/>"></script>
 		<link rel="stylesheet" type="text/css" href="<c:url value='/css/supplementDetail.css'/>">
 		<c:import url="/WEB-INF/views/layout/head.jsp" />
 	</head>
@@ -226,12 +226,9 @@
 						</td> --%>
 						<td>
 						    <c:if test="${review.userId == sessionScope.sid}">
-						        <form method="get" 
-						              action="#" 
-						              onsubmit="openReviewEditPopup('${sup.supId}', '${review.reviewNo}'); return false;" 
-						              style="display:inline;">
-						            <button type="submit">수정</button>
-						        </form>
+							<a href="/supplement/supplementDetail/${supplementDetail.supId}/review/${review.reviewNo}/edit">
+							    <button type="button" class="editButton">수정</button>
+							</a>
 						    </c:if>
 						</td>
 						

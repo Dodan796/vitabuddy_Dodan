@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/mypage.css'/>">
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/head.css'/>">
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/footer.css'/>">
+<c:import url="/WEB-INF/views/layout/head.jsp"/>
 <meta charset="UTF-8">
 <title>마이페이지</title>
 </head>
@@ -38,7 +41,10 @@
 				
 				</form>
 			</div>
-			<button class="submit-btn" onclick="location.href='infoChange.jsp'"> 회원 정보 수정하기 </button>
+			<!-- 예시: sessionScope에서 사용자 ID 가져와서 URL 파라미터로 추가 -->
+			<button class="submit-btn" onclick="location.href='/member/myInfoChangeForm?userId=${sessionScope.sid}'">회원 정보 수정하기</button>
+
+
 			<div>
 				<div class="review-section" style ="padding-right:20%; padding-left:20%;">
 				 	내가 작성한 리뷰 목록

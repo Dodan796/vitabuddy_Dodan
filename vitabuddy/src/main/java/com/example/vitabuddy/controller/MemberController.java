@@ -30,14 +30,21 @@ public class MemberController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody MemberDTO member) {
+    public ResponseEntity<Map<String, Object>> register(@RequestBody MemberDTO member) {
         boolean isRegistered = memberService.registerMember(member);
+        Map<String, Object> response = new HashMap<>();
 
         if (!isRegistered) {
-            return new ResponseEntity<>("Passwords do not match", HttpStatus.BAD_REQUEST);
+            response.put("success", false);
+            response.put("message", "비밀번호 확인이 일치하지 않습니다.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response); // 에러 상태와 메시지를 반환
         }
-        return new ResponseEntity<>("Registration successful", HttpStatus.OK);
+        
+        response.put("success", true);
+        response.put("redirect", "/member/login");
+        return ResponseEntity.ok(response); // 성공 시 응답과 리다이렉트 URL을 JSON으로 반환
     }
+
     
     @GetMapping("/checkId")
     public ResponseEntity<Map<String, Boolean>> checkId(@RequestParam String userId) {
@@ -46,4 +53,10 @@ public class MemberController {
         response.put("available", isAvailable);
         return ResponseEntity.ok(response);
     }
+    
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "intro"; // /WEB-INF/views/member/intro.jsp로 이동
+    }
+
 }

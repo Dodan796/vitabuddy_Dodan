@@ -82,8 +82,6 @@ function registerMember() {
         userAddress2: document.getElementById("userAddress2").value
     };
 
-    console.log("memberData:", memberData);  // 확인용 로그 (콘솔에 출력)
-
     fetch("/member/register", {
         method: "POST",
         headers: {
@@ -91,13 +89,12 @@ function registerMember() {
         },
         body: JSON.stringify(memberData)
     })
-    .then(response => response.text())
+    .then(response => response.json()) // JSON 형태로 응답 받음
     .then(data => {
-        if (data.includes("successful")) {
-            alert("회원가입이 완료되었습니다.");
-            window.location.href = "/login";  // 성공 시 로그인 페이지로 이동
+        if (data.success) {
+            window.location.href = data.redirect; // 리다이렉트 URL로 이동
         } else {
-            alert(data);  // 실패 시 에러 메시지 출력
+            alert(data.message || "회원가입에 실패했습니다."); // 실패 시 메시지 출력
         }
     })
     .catch(error => console.error("Error:", error));
