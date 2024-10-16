@@ -1,42 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
-<html> 
-
+<html>
 <head>
-<meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/mypage.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/head.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/footer.css'/>">
+<meta charset="UTF-8">
 <title>마이페이지</title>
-<c:import url="/WEB-INF/views/layout/head.jsp"/> 
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>">
-<script src="https://kit.fontawesome.com/567f0760c2.js" crossorigin="anonymous"></script>
 </head>
-
-
 <body>
-	<c:import url="/WEB-INF/views/layout/top.jsp"/> 
+<c:import url="/WEB-INF/views/layout/top.jsp" /> 
+	<%-- <%@ include file="DYtop.jsp" %> --%><!-- 탑 경로  및 명령어 수정 -->
 	<section id="wrap">
 		<div class="container">
 			<div class="headers">
 					<h1>마이페이지</h1>
 			</div>
-			<div class="horizontal_box">
+			<div class="horizontal_box" style="width:80%;padding-right:20%; padding-left:20%;">
 				<form>
 					<label>이름</label>
 			        <input type="text" value=" ${getMember.getUserName() }" class="name" name="userName" readonly />
 					<label>복용 중인 영양제</label> <!--이거 데이터 들어오면 수정 요망-->
-			        <textarea textarea rows="10%" cols="100%" value="${getMember.getUserTabletList()}"  readonly></textarea>
-					<label>올바른 영양제 복용법</label>
-					<textarea textarea rows="10%" cols="100%" readonly></textarea>
-						
+			        <textarea rows="10%" cols="100%" value="${getMember.getUserTabletList()}" style=" resize: none; width: 75%;" readonly></textarea>
+					<!-- <label>올바른 영양제 복용법</label>
+					<textarea textarea rows="10%" cols="100%"readonly></textarea>	 -->
+					<div class="box_rowContents" style="display:flex; justify-content: space-between;padding-right:44%;"> 
+						<div class="horizontal_box"  readonly;>	
+							<label>추천 성분</label>
+							<textarea rows=20%; style="width:250%; resize: none;"></textarea>
+						</div>
+						<div class="horizontal_box"  readonly; >
+							<label>성분간 상호작용</label>
+							<textarea rows=20%; style="width:250%; resize: none;"></textarea>
+						</div>
+					</div>
+				
 				</form>
-				<button class="submit-btn" onclick="location.href='/member/myInfoChangeForm'">정보 수정하기 </button>
 			</div>
-			
+			<button class="submit-btn" onclick="location.href='infoChange.jsp'"> 회원 정보 수정하기 </button>
 			<div>
-				<div class="review-section">
+				<div class="review-section" style ="padding-right:20%; padding-left:20%;">
 				 	내가 작성한 리뷰 목록
 					<select>
 						<option>정렬 기준</option>
@@ -61,11 +65,11 @@
 							</tr>
 						</tbody>
 					</table>
-						<div align ="center" class="board">
+						<div align ="center" class="board" >
 							작성하신 리뷰가 없습니다.
 						</div>
 				</div>
-				<div class="purchase-section" >
+				<div class="purchase-section" style ="padding-right:20%; padding-left:20%;">
 					구매 내역
 					<select>
 						<option>현재 주문 처리 상태</option>
@@ -101,7 +105,5 @@
 		</div>
 	</section>
 	<c:import url="/WEB-INF/views/layout/footer.jsp"/>
-
 </body>
-
 </html>

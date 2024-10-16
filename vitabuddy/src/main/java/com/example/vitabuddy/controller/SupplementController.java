@@ -37,4 +37,17 @@ public class SupplementController {
         boolean deleted = supplementService.deleteSupplement(userId, supId);
         return deleted ? "영양제가 성공적으로 삭제되었습니다." : "영양제 삭제에 실패했습니다.";
     }
+    
+    @PostMapping("/add")
+    public ResponseEntity<String> addSupplement(@RequestParam String userId, @RequestParam Integer supId) {
+        boolean added = supplementService.addSupplement(userId, supId);
+        if (added) {
+            return ResponseEntity.ok("영양제가 성공적으로 추가되었습니다.");
+        } else {
+            System.out.println("영양제 추가 실패: userId = " + userId + ", supId = " + supId);
+            return ResponseEntity.status(500).body("영양제 추가에 실패했습니다.");
+        }
+    }
+
+
 }

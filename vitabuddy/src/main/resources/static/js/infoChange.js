@@ -1,3 +1,18 @@
+// URL에서 userId 파라미터 추출
+function getUserIdFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('userId');
+}
+
+// 현재 사용자 ID를 전역 변수로 설정
+const userId = getUserIdFromUrl();
+
+if (!userId) {
+    alert("사용자 ID가 올바르게 설정되지 않았습니다.");
+} else {
+    console.log("현재 사용자 ID:", userId);  // 디버그용 로그
+}
+
 // 검색된 영양제 목록 표시
 function searchSupplements() {
     const keyword = document.getElementById('keyword').value;
@@ -8,6 +23,7 @@ function searchSupplements() {
         method: 'GET',
         data: { keyword: keyword, brand: brand },
         success: function(data) {
+            console.log('검색 결과:', data); // 검색 결과 확인
             displaySupplementList(data);
         },
         error: function() {
@@ -54,13 +70,13 @@ function addToCurrentList(supplement) {
     listItem.appendChild(deleteButton);
     currentList.appendChild(listItem);
 
-    // 서버에 추가 요청 (예시)
     $.ajax({
-        url: '/supplement/add', // 실제로는 해당 URL에 맞게 수정
+        url: '/supplement/add',
         method: 'POST',
-        data: { userId: '현재 사용자 ID', supId: supplement.supID },
+        data: { userId: userId, supId: supplement.supID }, // URL에서 추출한 userId가 삽입됨
         success: function(response) {
             console.log('영양제 추가 성공:', response);
+            alert(response); // 성공 메시지 표시
         },
         error: function() {
             alert('영양제 추가에 실패했습니다.');
@@ -74,9 +90,8 @@ function removeFromCurrentList(supId) {
 
     // 서버에 삭제 요청
     $.ajax({
-        url: '/supplement/delete',
+        url: `/supplement/delete?userId=${userId}&supId=${supId}`,
         method: 'DELETE',
-        data: { userId: '현재 사용자 ID', supId: supId },
         success: function(response) {
             alert(response); // 성공 메시지 표시
             // 리스트에서 항목 제거
