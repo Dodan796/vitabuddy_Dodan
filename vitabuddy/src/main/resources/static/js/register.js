@@ -95,7 +95,7 @@ function registerMember() {
     .then(data => {
         if (data.includes("successful")) {
             alert("회원가입이 완료되었습니다.");
-            window.location.href = "/login";  // 성공 시 로그인 페이지로 이동
+            window.location.href = "/intro";  // 성공 시 로그인 페이지로 이동
         } else {
             alert(data);  // 실패 시 에러 메시지 출력
         }
