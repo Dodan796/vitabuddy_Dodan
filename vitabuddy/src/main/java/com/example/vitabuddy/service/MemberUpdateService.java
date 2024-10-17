@@ -28,10 +28,14 @@ public class MemberUpdateService implements IMemberUpdateService {
         // 비밀번호가 수정되는 경우에만 암호화하여 설정
         if (vo.getUserPwd() != null && !vo.getUserPwd().isEmpty()) {
             String encodedPassword = pwdEncoder.encode(vo.getUserPwd());
-            vo.setUserPwd(encodedPassword);
+            vo.setUserPwd(encodedPassword); 
+        }else {  //else블록 추가_1017
+        	String existingEncodedPassword = dao.getEncodedPasswordById(vo.getUserId());  // DAO에서 비밀번호 조회
+            vo.setUserPwd(existingEncodedPassword);
         }
         dao.myInfoUpdate(vo);
     }
+
 }
 
 	
