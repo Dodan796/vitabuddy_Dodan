@@ -31,7 +31,7 @@
 						</td>
 						<td rowspan="6">
 							<!-- 이미지 표시 방식 수정: Base64 인코딩으로 변환된 이미지를 표시 -->
-							<img class="prdImg" src="data:image/png;base64,${supImgBase64}" width="300" height="300" alt="Product Image">
+							<img class="prdImg" src="data:image/png;base64,${supImgBase64}" width="300" height="300">
 						</td>
 					</tr>
 
