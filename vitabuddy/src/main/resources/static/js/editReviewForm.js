@@ -9,13 +9,27 @@ $(document).ready(function () {
 
         const supId = $(this).data('sup-id');
         const reviewNo = $(this).data('review-no');
+		
+		// 브라우저 창 크기
+        var screenWidth = window.innerWidth;
+        var screenHeight = window.innerHeight;
+
+        // %로 창 크기와 위치 계산
+        var popupWidth = screenWidth * 0.7;  // 너비의 70%
+        var popupHeight = screenHeight * 0.65;  // 높이의 65%
+        // 창 가운데 정렬
+        var popupLeft = (screenWidth - popupWidth) / 2;  
+        var popupTop = (screenHeight - popupHeight) / 2;
+		
 
         // 경로 설정하여 팝업 창 열기
         const popupUrl = `/supplement/supplementDetail/${supId}/review/${reviewNo}/editForm`;
+        
         const popup = window.open(
+        
             popupUrl,
             'editReviewPopup',
-            'width=1000,height=500,left=100,top=50'
+            `width=${popupWidth},height=${popupHeight},left=${popupLeft},top=${popupTop}`
         );
 
         // 팝업이 정상적으로 열렸는지 확인

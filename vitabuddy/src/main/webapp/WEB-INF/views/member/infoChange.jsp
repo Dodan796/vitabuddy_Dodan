@@ -92,7 +92,10 @@
                         <label>복용 중인 영양제</label>
                         <ul id="currentSupplementList">
                             <c:forEach var="supplement" items="${userSupplements}">
-                                <li>${supplement.supName} - ${supplement.supBrand}</li>
+                                <li>
+                                	${supplement.supName} - ${supplement.supBrand}
+                                	<button onclick="deleteSupplement(${supplement.supID})">삭제</button><!-- 삭제버튼 추가. -->
+                               	</li>
                             </c:forEach>
                         </ul>
                     </div>

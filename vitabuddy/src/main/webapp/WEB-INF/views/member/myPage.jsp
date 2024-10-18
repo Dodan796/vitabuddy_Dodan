@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/mypage.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>">
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/head.css'/>">
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/footer.css'/>">
 <c:import url="/WEB-INF/views/layout/head.jsp"/>
@@ -24,8 +24,13 @@
 				<form>
 					<label>이름</label>
 			        <input type="text" value=" ${getMember.getUserName() }" class="name" name="userName" readonly />
-					<label>복용 중인 영양제</label> <!--이거 데이터 들어오면 수정 요망-->
-			        <textarea rows="10%" cols="100%" value="${getMember.getUserTabletList()}" style=" resize: none; width: 75%;" readonly></textarea>
+					<!-- 복용 중인 영양제 -->
+					<label>복용 중인 영양제</label>
+					<textarea rows="10%" cols="100%" style="resize: none; width: 75%;" readonly>
+					    <c:forEach var="supplement" items="${userSupplements}">
+					        ${supplement.supName} - ${supplement.supBrand}&#13;&#10;
+					    </c:forEach>
+					</textarea>
 					<!-- <label>올바른 영양제 복용법</label>
 					<textarea textarea rows="10%" cols="100%"readonly></textarea>	 -->
 					<div class="box_rowContents" style="display:flex; justify-content: space-between;padding-right:44%;"> 

@@ -2,7 +2,7 @@ INSERT ALL
 	INTO IngredientInteraction (InteractionId, InteractionIngredient1, InteractionIngredient2, InteractionDetail, InteractionDosage)
 	VALUES('1', '비타민C', '비타민B', '문제: 고용량의 비타민 C를 비타민 B12와 함께 복용하면, 비타민 B12가 체내에서 분해되어 효능이 떨어질 수 있습니다. 비타민 B12는 신경 건강과 적혈구 생성에 중요한 역할을 합니다.', '올바른 복용법: 비타민 C와 비타민 B12를 다른 시간대에 복용하는 것이 좋습니다.')
 	INTO IngredientInteraction (InteractionId, InteractionIngredient1, InteractionIngredient2, InteractionDetail, InteractionDosage)
-	VALUES('2', '비타민C', '철분', '문제: 비타민 C는 철분의 흡수를 촉진합니다. 이는 철분이 부족한 사람들에게는 긍정적일 수 있지만, 과도한 철분 축적이 위험한 사람들에게는 문제가 될 수 있습니다.', '올바른 복용법: 비타민 C와 비타민 B12를 다른 시간대에 복용하는 것이 좋습니다.')
+	VALUES('2', '비타민C', '철분', '문제: 비타민 C는 철분의 흡수를 촉진합니다. 이는 철분이 부족한 사람들에게는 긍정적일 수 있지만, 과도한 철분 축적이 위험한 사람들에게는 문제가 될 수 있습니다.', '올바른 복용법: 철분 보충제와 비타민 C를 함께 복용할 때는 철분 수치를 모니터링해야 하며, 필요에 따라 복용 간격을 두는 것이 좋습니다.')
 	INTO IngredientInteraction (InteractionId, InteractionIngredient1, InteractionIngredient2, InteractionDetail, InteractionDosage)
 	VALUES ('3', '비타민B', '칼슘', '문제: 칼슘은 비타민 B12의 흡수를 저해할 수 있습니다. 특히 나이가 들수록 칼슘과 B12 간의 상호작용이 더 두드러질 수 있습니다.', '올바른 복용법: 칼슘과 비타민 B12는 다른 시간대에 복용하는 것이 좋습니다.')
 	INTO IngredientInteraction (InteractionId, InteractionIngredient1, InteractionIngredient2, InteractionDetail, InteractionDosage)
