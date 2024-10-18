@@ -1,11 +1,17 @@
 package com.example.vitabuddy.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.vitabuddy.dto.UserSupplementDTO;
 import com.example.vitabuddy.model.MemberVO;
 import com.example.vitabuddy.service.MemberUpdateService;
+import com.example.vitabuddy.service.SupplementService;
+
 import org.springframework.ui.Model;
 import jakarta.servlet.http.HttpSession;
 
@@ -14,6 +20,9 @@ public class MemberUpdateController {
     
     @Autowired
     MemberUpdateService memService;
+    
+    @Autowired
+    SupplementService supService;  
 
     // 마이페이지 > 회원정보 수정폼으로 이동
     @RequestMapping("/member/myInfoChangeForm")
@@ -22,6 +31,10 @@ public class MemberUpdateController {
         String userId = (String) session.getAttribute("sid");  
         MemberVO myInfo = memService.myInfoUpdateForm(userId);
         model.addAttribute("myInfo", myInfo);
+        
+        List<UserSupplementDTO> userSupplements = supService.getUserSupplements(userId);
+        model.addAttribute("userSupplements", userSupplements);
+        
         return "member/infoChange"; // JSP 파일 이름에 맞게 경로 수정
     }
 

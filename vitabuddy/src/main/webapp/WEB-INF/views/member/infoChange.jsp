@@ -39,7 +39,7 @@
 								<input type="password"   name="confirmPwd" id="confirmPwd" oninput="pwCheck()" />   <!-- required 제거 -->
 								<p id="pwOk"></p>
 								<label>이메일 변경</label>
-								<input type="email" name="userEmail" id="userEmail" onchange="emailCheck()"  value="${myInfo.userEmail}" required />  
+								<input type="email" name="userEmail" id="userEmail" onchange="emailCheck()"  value="${myInfo.userEmail}" required />
 								<p id="emOk"></p>
 								<label>전화 번호 변경</label>
 								
@@ -93,6 +93,7 @@
                         <ul id="currentSupplementList">
                             <c:forEach var="supplement" items="${userSupplements}">
                                 <li>${supplement.supName} - ${supplement.supBrand}</li>
+                                <button onclick="deleteSupplement(${supplement.supID})">삭제</button>
                             </c:forEach>
                         </ul>
                     </div>
