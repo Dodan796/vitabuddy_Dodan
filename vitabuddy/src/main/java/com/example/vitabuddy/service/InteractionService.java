@@ -14,16 +14,6 @@ public class InteractionService implements IInteratcionService {
     IInteractionDAO dao;
 
     @Override
-    public List<Integer> getUserSupplements(String userId) {
-        return dao.getUserSupplements(userId);
-    }
-
-    @Override
-    public List<Integer> getIngredientsBySupId(String userId) {
-        return dao.getIngredientsBySupId(userId);
-    }
-
-    @Override
     public List<String> getIngredientNames(String userId) {
         return dao.getIngredientNames(userId);
     }
