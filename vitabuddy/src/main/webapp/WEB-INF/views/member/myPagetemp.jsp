@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="<c:url value='/css/mypage.css'/>">
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/myPage.css'/>">  <!-- 1018 수정사항 : mypage에서 myPage로 바꿈 -->
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/head.css'/>">
 <link rel="stylesheet" type="text/css" href="<c:url value='/css/footer.css'/>">
 <c:import url="/WEB-INF/views/layout/head.jsp"/>
@@ -22,22 +22,22 @@
             <h1>마이페이지</h1>
         </div>
         
-        <div class="horizontal_box" style="/* width:80%;padding-right:20%; padding-left:20%; */">
+        <div class="horizontal_box" style="width:80%;padding-right:20%; padding-left:20%;">
             <form>
                 <label>이름</label>
                 <input type="text" value="${getMember.getUserName()}" class="name" name="userName" readonly />
                 
                 <label>복용 중인 영양제</label>
-                <textarea rows="10%" cols="100%" value="${getMember.getUserTabletList()}" style="/* resize: none; width: 75%; */" readonly></textarea>
+                <textarea rows="10%" cols="100%" value="${getMember.getUserTabletList()}" style="resize: none; width: 75%;" readonly></textarea>
                 
-                <div class="box_rowContents" style="/* display:flex; justify-content: space-between;padding-right:44%; */"> 
+                <div class="box_rowContents" style="display:flex; justify-content: space-between;padding-right:44%;"> 
                     <div class="horizontal_box" readonly>    
                         <label>추천 성분</label>
-                        <textarea rows="20%" style="/* width:250%; resize: none; */"></textarea>
+                        <textarea rows="20%" style="width:250%; resize: none;"></textarea>
                     </div>
                     <div class="horizontal_box" readonly>
                         <label>성분간 상호작용</label>
-                        <textarea rows="20%" style="/* width:250%; resize: none; */"></textarea>
+                        <textarea rows="20%" style="width:250%; resize: none;"></textarea>
                     </div>
                 </div>
             </form>
@@ -46,7 +46,7 @@
         <button class="submit-btn" onclick="location.href='/member/myInfoChangeForm?userId=${sessionScope.sid}'">회원 정보 수정하기</button>
 
         <!-- 내가 작성한 리뷰 목록 -->
-        <div class="review-section" style="/* padding-right:20%; padding-left:20%; */">
+        <div class="review-section" style="padding-right:20%; padding-left:20%;">
             <h3>내가 작성한 리뷰 목록</h3>
             <form action="/myPage/reviews" method="get">
                 <label for="sort">정렬 기준:</label>
@@ -88,7 +88,7 @@
         </div>
 
         <!-- 구매 내역 -->
-        <div class="purchase-section" style="/* padding-right:20%; padding-left:20%; */">
+        <div class="purchase-section" style="padding-right:20%; padding-left:20%;">
             <h3>구매 내역</h3>
             <select>
                 <option>현재 주문 처리 상태</option>
