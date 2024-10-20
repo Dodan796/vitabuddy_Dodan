@@ -38,7 +38,7 @@
                         </div>
                         <div class="horizontal_box" readonly>
 					   		<label>성분간 상호작용</label>
-								<textarea rows="100%" readonly>
+								<textarea rows="20%" readonly>
 								    <c:choose>								        
 								        <c:when test="${not empty interactions}">
 								            <c:forEach var="interaction" items="${interactions}" varStatus="status">
