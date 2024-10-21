@@ -71,18 +71,16 @@
 										<c:if
 											test="${interaction.ingredient2 != '해당 없음' && interaction.interactionDetail != '상호작용 정보 없음'}">
 											<!-- 10/21 div 태그 추가 -->
-											<div class="interactionList">${status.index + 1}.
-												${interaction.ingredient1} -
-												${interaction.ingredient2}&#13;&#10; 상호작용:
-												${fn:trim(interaction.interactionDetail)}&#13;&#10; 복용 권장
-												사항:
+											<div class="interactionList">												
+												<strong>${interaction.ingredient1} -
+												${interaction.ingredient2}&#13;&#10;</strong><br>
+												${fn:trim(interaction.interactionDetail)}&#13;&#10;<br><br> 												
 												${fn:trim(interaction.interactionDosage)}&#13;&#10;&#13;&#10;
 											</div>
 										</c:if>
 									</c:forEach>
 								</c:when>
 							</c:choose>
-
 						</div>
 					</div>
 				</div>
