@@ -38,29 +38,19 @@
                         </div>
                         <div class="horizontal_box" readonly>
 					   		<label>성분간 상호작용</label>
-								<textarea rows="20%" readonly>
-								    <c:choose>								        
-								        <c:when test="${not empty interactions}">
-								            <c:forEach var="interaction" items="${interactions}" varStatus="status">
-								                ${status.index + 1}. ${interaction.ingredient1}
-								                <c:if test="${interaction.ingredient2 != '해당 없음'}">
-								                    - ${interaction.ingredient2}
-								                </c:if>
-								                &#13;&#10;								                								               
-								                <c:if test="${interaction.interactionDetail != '상호작용 정보 없음'}">
-								                    ${fn:trim(interaction.interactionDetail)}&#13;&#10;
-								                </c:if>
-								                 ${fn:trim(interaction.interactionDosage)}&#13;&#10;&#13;&#10;
-								            </c:forEach>
-								        </c:when>								        								        
-								        <c:otherwise>
-								            <c:forEach var="interaction" items="${interactions}" varStatus="status">
-								                ${status.index + 1}. ${interaction.ingredient1}&#13;&#10;
-								                복용 권장 사항: ${fn:trim(interaction.interactionDosage)}&#13;&#10;&#13;&#10;
-								            </c:forEach>
-								        </c:otherwise>
-								    </c:choose>
-								</textarea>
+							<textarea rows="20%" readonly>
+							    <c:choose>							      
+							        <c:when test="${not empty interactions}">
+							            <c:forEach var="interaction" items="${interactions}" varStatus="status">							               
+							                <c:if test="${interaction.ingredient2 != '해당 없음' && interaction.interactionDetail != '상호작용 정보 없음'}">
+							                    ${status.index + 1}. ${interaction.ingredient1} - ${interaction.ingredient2}&#13;&#10;
+							                    상호작용: ${fn:trim(interaction.interactionDetail)}&#13;&#10;
+							                    복용 권장 사항: ${fn:trim(interaction.interactionDosage)}&#13;&#10;&#13;&#10;
+							                </c:if>
+							            </c:forEach>
+							        </c:when>
+							    </c:choose>
+							</textarea>
 						</div>
                     </div>
                 </form>

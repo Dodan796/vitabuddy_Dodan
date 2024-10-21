@@ -25,7 +25,7 @@ public class MyPageController {
     private SupplementService supService;
 
     @Autowired
-    private ReviewService reviewService; // 리뷰 서비스를 주입받습니다.
+    private ReviewService reviewService; 
 
     @Autowired
     private InteractionService intService;

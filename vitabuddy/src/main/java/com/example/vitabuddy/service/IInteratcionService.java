@@ -1,7 +1,6 @@
 package com.example.vitabuddy.service;
 
 import java.util.List;
-import com.example.vitabuddy.model.IngredientVO;
 import com.example.vitabuddy.model.InteractionVO;
 
 public interface IInteratcionService {
