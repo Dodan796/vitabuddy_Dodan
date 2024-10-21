@@ -53,7 +53,10 @@ public class MyPageController {
         //1. 사용자가 선택한 영양제 목록의 "주성분" 조회
         ArrayList<RecommendVO> recommendIngredientList = recommendService.recommendIngredients(userId);
         //model.addAttribute("recommendIngredientList", recommendIngredientList);
-        System.out.println(recommendIngredientList);
+        for (RecommendVO recommendIngredient : recommendIngredientList) {
+        	System.out.println("사용자가 선택한 영양제입니다 : " + recommendIngredient.getIngredient());
+        }
+        
         
         Map<Object, ArrayList<RecommendVO>> allRecommendLists = new HashMap<>();
 
@@ -64,6 +67,7 @@ public class MyPageController {
             // 각 영양제에 대해 추천 성분 리스트를 가져옴
             ArrayList<RecommendVO> recommendLists = recommendService.interactionRecommend(ingredientId);
             System.out.println("서비스계층 테스트 출력" + recommendLists);
+
             for (RecommendVO recommendVO : recommendLists) {
             	System.out.println("Ingredients: " + recommendVO.getIngredients());
                 System.out.println("Interaction Recommend: " + recommendVO.getInteractionRecommend());

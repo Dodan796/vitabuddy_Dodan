@@ -41,14 +41,38 @@
 <!--10/21 textarea>div로 변경--><div class="recommend">
 					<!-- 내용 추가할 떄 반복문 안 요소들을 아래 <div> 태그로 묶어주세요 -->
 					<div class="recommentList">
-							<c:forEach var="entry" items="${allRecommendLists}">
-						        <b>${entry.key+1}.</b>
-						        <c:forEach var="recommendVO" items="${entry.value}">
-						            <b>추천 성분</b>: ${recommendVO.ingredients} <br>
-						            <b>영양제 궁합</b>: ${recommendVO.interactionRecommend} <br>
-						            <br>
-						        </c:forEach>
-						    </c:forEach>
+						    <!--<c:forEach var="entry" items="${allRecommendLists}">
+							    <b>${entry.key + 1}.</b>
+							    <c:forEach var="recommendVO" items="${entry.value}">
+							        <c:choose>
+							            
+							            <c:when test="${not empty recommendVO}">
+							                <b>추천 성분</b>: ${recommendVO.ingredients} <br>
+							                <b>영양제 궁합</b>: ${recommendVO.interactionRecommend} <br>
+							                <br>
+							            </c:when>
+							            <c:otherwise>
+							                <b>추천 성분</b>: [] <br>
+							            </c:otherwise>
+							        </c:choose>
+							    </c:forEach>
+							</c:forEach>-->
+							<c:forEach var="entry" items="${allRecommendLists}" >
+							    <b>${entry.key + 1}.</b> <!-- key 대신 index로 순서 지정 -->
+							    <c:choose>
+							        <c:when test="${not empty entry.value}">
+							            <c:forEach var="recommendVO" items="${entry.value}">
+							                <b>추천 성분</b>: ${recommendVO.ingredients} <br>
+							                <b>영양제 궁합</b>: ${recommendVO.interactionRecommend} <br>
+							                <br>
+							            </c:forEach>
+							        </c:when>
+							        <c:otherwise>
+							            <!-- 데이터가 없을 때 []를 출력 -->
+							            <b>추천 성분</b>: [ ] <br><br>
+							        </c:otherwise>
+							    </c:choose>
+							</c:forEach>
 					</div>
 
 							</div>	
