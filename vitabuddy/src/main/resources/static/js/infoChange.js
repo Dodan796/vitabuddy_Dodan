@@ -104,8 +104,8 @@ function removeFromCurrentList(supId) {
             alert('영양제 삭제에 실패했습니다.');
         }
     });
-    
- }  
+}
+
 function deleteSupplement(supId) {
     // 서버에 삭제 요청
     $.ajax({
@@ -120,7 +120,4 @@ function deleteSupplement(supId) {
             alert('영양제 삭제에 실패했습니다.');
         }
     });
-    
 }
-
-

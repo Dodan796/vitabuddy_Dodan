@@ -50,6 +50,6 @@ public class MemberUpdateController {
         String userPh = userPh1 + "-" + userPh2 + "-" + userPh3;
         vo.setUserPh(userPh); 
         memService.myInfoUpdate(vo);
-        return "redirect:/myPage";  // 수정 후 마이페이지로 리다이렉트
+        return "redirect:/member/myPage";  // 수정 후 마이페이지로 리다이렉트
     }
 }
