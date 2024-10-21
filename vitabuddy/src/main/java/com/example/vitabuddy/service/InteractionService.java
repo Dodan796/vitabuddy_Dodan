@@ -7,7 +7,7 @@ import com.example.vitabuddy.dao.IInteractionDAO;
 import com.example.vitabuddy.model.InteractionVO;
 
 @Service
-public class InteractionService implements IInteratcionService {
+public class InteractionService implements IInteractionService {
 
     @Autowired
     IInteractionDAO dao;

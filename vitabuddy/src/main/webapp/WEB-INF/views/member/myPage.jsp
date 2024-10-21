@@ -68,14 +68,14 @@
 								<c:when test="${not empty interactions}">
 									<c:forEach var="interaction" items="${interactions}"
 										varStatus="status">
-										<c:if
-											test="${interaction.ingredient2 != '해당 없음' && interaction.interactionDetail != '상호작용 정보 없음'}">
+										<c:if test="${interaction.ingredient2 != '해당 없음' && interaction.interactionDetail != '상호작용 정보 없음'}">
 											<!-- 10/21 div 태그 추가 -->
 											<div class="interactionList">												
-												<strong>${interaction.ingredient1} -
-												${interaction.ingredient2}&#13;&#10;</strong><br>
+												<li>
+												<strong>${interaction.ingredient1} - ${interaction.ingredient2}&#13;&#10;</strong><br>
 												${fn:trim(interaction.interactionDetail)}&#13;&#10;<br><br> 												
 												${fn:trim(interaction.interactionDosage)}&#13;&#10;&#13;&#10;
+												</li>
 											</div>
 										</c:if>
 									</c:forEach>

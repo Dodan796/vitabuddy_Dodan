@@ -3,7 +3,7 @@ package com.example.vitabuddy.service;
 import java.util.List;
 import com.example.vitabuddy.model.InteractionVO;
 
-public interface IInteratcionService {
+public interface IInteractionService {
     
   
     // 1. 성분 이름 조회
