@@ -38,11 +38,3 @@ $(document).ready(function () {
         }
     });
 });
-
-
-
-
-
-
-
-

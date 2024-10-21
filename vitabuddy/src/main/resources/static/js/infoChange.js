@@ -123,4 +123,3 @@ function deleteSupplement(supId) {
     });
 }
 
-

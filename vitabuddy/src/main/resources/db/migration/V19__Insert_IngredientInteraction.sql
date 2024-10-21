@@ -25,4 +25,6 @@ INSERT ALL
 	VALUES ('12', '2', '10', '문제: 소화불량을 일으킬 수 있습니다.', '올바른 복용법: 루테인과 마그네슘의 복용 간격을 6시간 이상 두는 것을 권장합니다.')
 	INTO IngredientInteraction (InteractionNo, InteractionIngredient1, InteractionIngredient2, InteractionDetail, InteractionDosage)
 	VALUES ('13', '13', '6', '문제: 산성이 강한 비타민 C는 유산균의 생존율을 떨어뜨리기 때문에 같이 먹는 것은 좋지 않습니다.', '올바른 복용법: 유산균은 장 건강을 위해 빈속에 먹어야 하고, 비타민 C는 반대로 빈속에 먹으면 속이 쓰리기 때문에 두 영양제는 함께 복용하지 않는 것이 좋습니다.')
-	SELECT 1 FROM DUAL;
+
+	SELECT 1 FROM DUAL; 
+
