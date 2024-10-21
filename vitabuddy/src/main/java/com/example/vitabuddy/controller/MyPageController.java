@@ -55,8 +55,8 @@ public class MyPageController {
         
         // 사용자가 작성한 리뷰 목록을 조회
         List<ReviewVO> userReviews = reviewService.getUserReviews(userId);
-        model.addAttribute("reviews", userReviews); // JSP에 전달할 리뷰 목록 추가
+        model.addAttribute("reviews", userReviews); 
 
-        return "member/myPage"; // member/myPage.jsp로 이동
+        return "member/myPage"; 
     }
 }
